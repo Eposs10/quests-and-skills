@@ -38,3 +38,4 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+/.github/workflows/build.yml
