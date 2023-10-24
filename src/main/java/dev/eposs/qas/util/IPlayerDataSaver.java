@@ -1,7 +1,7 @@
-package dev.eposs.qas.config;
+package dev.eposs.qas.util;
 
 import net.minecraft.nbt.NbtCompound;
 
-public interface IModConfigSaver {
+public interface IPlayerDataSaver {
     NbtCompound getPersistentData();
 }

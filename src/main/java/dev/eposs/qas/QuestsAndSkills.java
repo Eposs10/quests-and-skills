@@ -22,7 +22,7 @@ public class QuestsAndSkills implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	// Config NBT Key for Player-persistentData
+	// NBT Key for Player-persistentData
 	public static final String PLAYER_DATA_KEY = MOD_ID+".player_data";
 
 	@Override

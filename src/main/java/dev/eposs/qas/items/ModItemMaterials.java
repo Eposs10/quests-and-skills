@@ -7,7 +7,7 @@ import net.minecraft.recipe.Ingredient;
 
 import java.util.function.Supplier;
 
-public enum ModItemMaterial implements ToolMaterial {
+public enum ModItemMaterials implements ToolMaterial {
     ZERO_POINT_FIVE_DIA(ToolMaterials.DIAMOND.getMiningLevel(), ToolMaterials.DIAMOND.getDurability(), ToolMaterials.DIAMOND.getMiningSpeedMultiplier(), ToolMaterials.DIAMOND.getAttackDamage() + 0.5f, ToolMaterials.DIAMOND.getEnchantability(), () -> Ingredient.ofItems(Items.DIAMOND))
     ;
 
@@ -18,7 +18,7 @@ public enum ModItemMaterial implements ToolMaterial {
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    ModItemMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
+    ModItemMaterials(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;

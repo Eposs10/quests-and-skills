@@ -1,7 +1,7 @@
 package dev.eposs.qas.mixin;
 
 import dev.eposs.qas.QuestsAndSkills;
-import dev.eposs.qas.config.IModConfigSaver;
+import dev.eposs.qas.util.IPlayerDataSaver;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public class PlayerDataMixin implements IModConfigSaver {
+public class PlayerDataMixin implements IPlayerDataSaver {
     private NbtCompound persistentData;
 
     @Override
