@@ -1,7 +1,9 @@
 package dev.eposs.qas.mixin;
 
 import dev.eposs.qas.QuestsAndSkills;
-import dev.eposs.qas.util.IPlayerDataSaver;
+import dev.eposs.qas.util.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.util.skills.ModSkills;
+import dev.eposs.qas.util.skills.Skills;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
@@ -24,6 +26,17 @@ public class PlayerDataMixin implements IPlayerDataSaver {
 
         // Default Config Values
 
+        if (!persistentData.contains(ModSkills.NBT_ROOT)) { // SkillData
+            var skillData = new NbtCompound();
+            skillData.putLong(Skills.COMBAT.getName(), 0);
+            skillData.putLong(Skills.MINING.getName(), 0);
+            skillData.putLong(Skills.FARMING.getName(), 0);
+            skillData.putLong(Skills.FORAGING.getName(), 0);
+            skillData.putLong(Skills.FISHING.getName(), 0);
+            skillData.putLong(Skills.EXPLORING.getName(), 0);
+
+            this.persistentData.put(ModSkills.NBT_ROOT, skillData);
+        }
 
         return persistentData;
     }

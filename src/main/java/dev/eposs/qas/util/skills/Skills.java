@@ -9,9 +9,13 @@ public enum Skills {
     EXPLORING("Exploring")
     ;
 
-    final String name;
+    private final String name;
 
     Skills(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

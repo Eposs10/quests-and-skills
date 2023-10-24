@@ -17,7 +17,7 @@ public class ModItemGroups {
                     .icon(() -> new ItemStack(Items.NETHER_STAR))
                     .entries(((displayContext, entries) -> {
                         // Items in order
-
+                        entries.add(ModItems.TEST_ITEM);
                     }))
                     .build()
     );

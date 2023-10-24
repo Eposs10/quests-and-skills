@@ -5,8 +5,10 @@ import dev.eposs.qas.effects.ModEffects;
 import dev.eposs.qas.items.ModItemGroups;
 import dev.eposs.qas.items.ModItems;
 import dev.eposs.qas.util.MobLootTableModifiers;
+import dev.eposs.qas.util.playerdata.PlayerDataKeeper;
 import dev.eposs.qas.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +43,10 @@ public class QuestsAndSkills implements ModInitializer {
 		ModEffects.registerEffects();
 
 		MobLootTableModifiers.modifyLootTables();
+
+		// Keep Data after Death
+		ServerPlayerEvents.COPY_FROM.register(PlayerDataKeeper::keepData);
+		ServerPlayerEvents.AFTER_RESPAWN.register(PlayerDataKeeper::keepData);
 	}
 
 
