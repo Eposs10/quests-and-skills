@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "quests-and-skills",
+	"version": "${version}",
+	"name": "Quests And Skills",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/quests-and-skills/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"dev.eposs.QuestsAndSkills"
+		],
+		"client": [
+			"dev.eposs.QuestsAndSkillsClient"
+		],
+		"fabric-datagen": [
+			"dev.eposs.QuestsAndSkillsDataGenerator"
+		]
+	},
+	"mixins": [
+		"quests-and-skills.mixins.json",
+		{
+			"config": "quests-and-skills.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.14.23",
+		"minecraft": "~1.20.2",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
