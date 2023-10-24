@@ -2,14 +2,17 @@ package dev.eposs;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class QuestsAndSkills implements ModInitializer {
+	// Mod ID
+	public static final String MOD_ID = "quests-and-skills";
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
-    public static final Logger LOGGER = LoggerFactory.getLogger("quests-and-skills");
+    public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
@@ -18,5 +21,13 @@ public class QuestsAndSkills implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+	}
+
+
+	/**
+	 * @return new Identifier(MOD_ID, name)
+	 */
+	public static Identifier modPath(String name) {
+		return new Identifier(MOD_ID, name);
 	}
 }
