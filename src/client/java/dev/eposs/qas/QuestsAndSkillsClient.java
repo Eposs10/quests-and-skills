@@ -1,4 +1,4 @@
-package dev.eposs;
+package dev.eposs.qas;
 
 import net.fabricmc.api.ClientModInitializer;
 

@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "dev.eposs.mixin.client",
+	"package": "dev.eposs.qas.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
 		"ExampleClientMixin"

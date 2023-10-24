@@ -1,4 +1,4 @@
-package dev.eposs.mixin.client;
+package dev.eposs.qas.mixin.client;
 
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
