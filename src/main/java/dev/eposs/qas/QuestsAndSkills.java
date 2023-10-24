@@ -10,6 +10,8 @@ import dev.eposs.qas.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,7 +55,8 @@ public class QuestsAndSkills implements ModInitializer {
 	/**
 	 * @return new Identifier(MOD_ID, name)
 	 */
-	public static Identifier modPath(String name) {
+	@Contract("_ -> new")
+	public static @NotNull Identifier modPath(String name) {
 		return new Identifier(MOD_ID, name);
 	}
 }
