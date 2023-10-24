@@ -1,7 +1,12 @@
 package dev.eposs.qas;
 
+import dev.eposs.qas.blocks.ModBlocks;
+import dev.eposs.qas.effects.ModEffects;
+import dev.eposs.qas.items.ModItemGroups;
+import dev.eposs.qas.items.ModItems;
+import dev.eposs.qas.util.MobLootTableModifiers;
+import dev.eposs.qas.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +31,16 @@ public class QuestsAndSkills implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Hello Fabric world!");
+		// World Generation
+		ModWorldGeneration.generateModWorldGen();
+
+		// Mod Registries
+		ModItemGroups.registerSbItemGroups();
+		ModItems.registerItems();
+		ModBlocks.registerBlocks();
+		ModEffects.registerEffects();
+
+		MobLootTableModifiers.modifyLootTables();
 	}
 
 

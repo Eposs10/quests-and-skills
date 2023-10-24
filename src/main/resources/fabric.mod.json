@@ -2,12 +2,14 @@
 	"schemaVersion": 1,
 	"id": "quests-and-skills",
 	"version": "${version}",
-	"name": "Quests And Skills",
-	"description": "",
+	"name": "Vanilla+ Quests and Skills",
+	"description": "Adds many new Quests and Skills to enhance your Minecraft experience.",
 	"authors": [
 		"Eposs"
 	],
-	"contact": {},
+	"contact": {
+		"Discord": "@eposs"
+	},
 	"license": "CC0-1.0",
 	"icon": "assets/quests-and-skills/icon.png",
 	"environment": "*",
