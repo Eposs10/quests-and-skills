@@ -40,7 +40,6 @@ public class ModSkills {
 
         playerEntity.sendMessage(Text.literal(skill.getName() + " " + exp / Skill.xpPerLevel + " [ " + exp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]"), true);
         playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
-        if (exp % Skill.xpPerLevel == 0) playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.1f, 2.0f);
     }
 
     /**
@@ -54,6 +53,10 @@ public class ModSkills {
 
         var newExp = currentExp + exp;
         setSkillExp(newExp, playerEntity, skill);
+
+        if ( (newExp%1000) < (currentExp%1000) ) { // only after Level Up
+            playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.1f, 2.0f);
+        }
 
         return newExp;
     }

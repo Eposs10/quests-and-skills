@@ -13,7 +13,7 @@ public class CombatHandling {
         if (!killer.isPlayer()) return;
         if (killedEntity.isPlayer()) return;
 
-        var maxHp =  killedEntity.getMaxHealth();
+        var maxHp =  killedEntity.getMaxHealth() * 10;
 
         ModSkills.addSkillExp((long) maxHp, (PlayerEntity) killer, Skills.COMBAT);
     }
