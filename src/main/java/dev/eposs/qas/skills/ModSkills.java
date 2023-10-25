@@ -6,6 +6,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 
 public class ModSkills {
@@ -37,9 +38,6 @@ public class ModSkills {
         var skillData = player.getPersistentData().getCompound(NBT_ROOT);
         skillData.putLong(skill.getName(), exp);
         player.getPersistentData().put(NBT_ROOT, skillData);
-
-        playerEntity.sendMessage(Text.literal(skill.getName() + " " + exp / Skill.xpPerLevel + " [ " + exp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]"), true);
-        playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
     }
 
     /**
@@ -54,9 +52,14 @@ public class ModSkills {
         var newExp = currentExp + exp;
         setSkillExp(newExp, playerEntity, skill);
 
+        // Exp gain Sound
+        playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
+        // Level up Sound
         if ( (newExp%1000) < (currentExp%1000) ) { // only after Level Up
             playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.1f, 2.0f);
         }
+        // Exp gain display
+        playerEntity.sendMessage(Text.literal("+" + exp + " - " + skill.getName() + " " + newExp / Skill.xpPerLevel + " [ " + newExp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]").formatted(Formatting.AQUA), true);
 
         return newExp;
     }

@@ -1,1 +1,4 @@
-// 1.20.2	2023-10-25T16:46:26.434542	Vanilla+ Quests and Skills/Tags for minecraft:item
+// 1.20.2	2023-10-25T22:44:24.346029	Vanilla+ Quests and Skills/Tags for minecraft:item
+a55081a6b9ab871139cf971a7df71a5df2288d84 data/quests-and-skills/tags/items/fishing_treasures.json
+80e56f6effead78902dc0cc2c37c79e264d399c5 data/quests-and-skills/tags/items/fishing_fish.json
+a6b21bd113ccbb9cb5dae4b11d505dee92763fd4 data/quests-and-skills/tags/items/fishing_junk.json

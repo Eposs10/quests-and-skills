@@ -17,6 +17,9 @@ public class ModTags {
     }
 
     public static class Items {
+        public static final TagKey<Item> FISHING_TREASURES = createTag("fishing_treasures");
+        public static final TagKey<Item> FISHING_JUNK = createTag("fishing_junk");
+        public static final TagKey<Item> FISHING_FISH = createTag("fishing_fish");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, QuestsAndSkills.modPath(name));

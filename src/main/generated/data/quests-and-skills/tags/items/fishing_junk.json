@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:lily_pad",
+    "minecraft:bowl",
+    "minecraft:leather",
+    "minecraft:leather_boots",
+    "minecraft:rotten_flesh",
+    "minecraft:stick",
+    "minecraft:string",
+    "minecraft:glass_bottle",
+    "minecraft:bone",
+    "minecraft:ink_sac",
+    "minecraft:tripwire_hook",
+    "minecraft:bamboo",
+    "minecraft:cocoa_beans"
+  ]
+}
