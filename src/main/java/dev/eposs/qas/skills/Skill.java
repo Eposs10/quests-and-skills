@@ -1,6 +1,8 @@
-package dev.eposs.qas.util.skills;
+package dev.eposs.qas.skills;
 
 public class Skill {
+    public static final int xpPerLevel = 1000;
+
     private final String name;
     private long skillExp;
 
@@ -30,6 +32,6 @@ public class Skill {
      * @return skillExp / 1000
      */
     public long getLevel() {
-        return skillExp / 1000;
+        return skillExp / xpPerLevel;
     }
 }

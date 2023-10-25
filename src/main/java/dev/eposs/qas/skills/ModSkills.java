@@ -1,8 +1,11 @@
-package dev.eposs.qas.util.skills;
+package dev.eposs.qas.skills;
 
-import dev.eposs.qas.util.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.playerdata.IPlayerDataSaver;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 public class ModSkills {
@@ -31,10 +34,13 @@ public class ModSkills {
     public static void setSkillExp(long exp, PlayerEntity playerEntity, @NotNull Skills skill) {
         var player = (IPlayerDataSaver) playerEntity;
 
-        var skillData = player.getPersistentData().getCompound(NBT_ROOT);;
+        var skillData = player.getPersistentData().getCompound(NBT_ROOT);
         skillData.putLong(skill.getName(), exp);
-
         player.getPersistentData().put(NBT_ROOT, skillData);
+
+        playerEntity.sendMessage(Text.literal(skill.getName() + " " + exp / Skill.xpPerLevel + " [ " + exp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]"), true);
+        playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
+        if (exp % Skill.xpPerLevel == 0) playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.1f, 2.0f);
     }
 
     /**

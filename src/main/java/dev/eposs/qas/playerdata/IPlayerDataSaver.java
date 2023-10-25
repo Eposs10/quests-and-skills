@@ -1,4 +1,4 @@
-package dev.eposs.qas.util.playerdata;
+package dev.eposs.qas.playerdata;
 
 import net.minecraft.nbt.NbtCompound;
 

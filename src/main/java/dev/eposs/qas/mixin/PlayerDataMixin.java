@@ -1,9 +1,9 @@
 package dev.eposs.qas.mixin;
 
 import dev.eposs.qas.QuestsAndSkills;
-import dev.eposs.qas.util.playerdata.IPlayerDataSaver;
-import dev.eposs.qas.util.skills.ModSkills;
-import dev.eposs.qas.util.skills.Skills;
+import dev.eposs.qas.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.skills.ModSkills;
+import dev.eposs.qas.skills.Skills;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;

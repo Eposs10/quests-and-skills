@@ -1,4 +1,4 @@
-package dev.eposs.qas.util.skills;
+package dev.eposs.qas.skills;
 
 public enum Skills {
     COMBAT("Combat"),
