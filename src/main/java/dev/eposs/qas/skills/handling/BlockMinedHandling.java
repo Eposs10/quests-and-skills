@@ -7,8 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
@@ -39,13 +37,8 @@ public class BlockMinedHandling {
         if (foraging) return;
 
         // Mining
-        if (mainHandStack.isIn(ItemTags.PICKAXES)) {
-            // Silk Touch Check
-            var enchants = EnchantmentHelper.get(mainHandStack);
-            if (enchants.containsKey(Enchantments.SILK_TOUCH)) return;
-
-            mining(blockState, player, true);
-        } else mining(blockState, player, false);
+        var mining = mining(blockState, player, mainHandStack.isIn(ItemTags.PICKAXES));
+        if (mining) return;
     }
 
     private static boolean farming(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
@@ -108,15 +101,17 @@ public class BlockMinedHandling {
         long exp = 0;
 
         if (blockState.isIn(ModTags.Blocks.MINING_SKILL_BASIC_BLOCKS)) exp = 1;
-        if (blockState.isIn(BlockTags.COAL_ORES)) exp = 5;
-        if (blockState.isIn(BlockTags.COPPER_ORES)) exp = 5;
-        if (blockState.isIn(BlockTags.REDSTONE_ORES)) exp = 5;
-        if (blockState.equals(Blocks.NETHER_QUARTZ_ORE.getDefaultState())) exp = 5;
-        if (blockState.isIn(BlockTags.IRON_ORES)) exp = 10;
-        if (blockState.isIn(BlockTags.LAPIS_ORES)) exp = 10;
-        if (blockState.isIn(BlockTags.GOLD_ORES)) exp = 15;
-        if (blockState.isIn(BlockTags.DIAMOND_ORES)) exp = 20;
-        if (blockState.isIn(BlockTags.EMERALD_ORES)) exp = 20;
+        if (blockState.isIn(ModTags.Blocks.MINING_SKILL_RARE_BLOCKS)) exp = 5;
+        if (blockState.isIn(BlockTags.COAL_ORES)) exp = 10;
+        if (blockState.isIn(BlockTags.COPPER_ORES)) exp = 10;
+        if (blockState.isIn(BlockTags.REDSTONE_ORES)) exp = 10;
+        if (blockState.equals(Blocks.NETHER_QUARTZ_ORE.getDefaultState())) exp = 10;
+        if (blockState.isIn(BlockTags.IRON_ORES)) exp = 15;
+        if (blockState.isIn(BlockTags.LAPIS_ORES)) exp = 15;
+        if (blockState.isIn(BlockTags.GOLD_ORES)) exp = 20;
+        if (blockState.isIn(BlockTags.DIAMOND_ORES)) exp = 25;
+        if (blockState.isIn(BlockTags.EMERALD_ORES)) exp = 25;
+        if (blockState.equals(Blocks.ANCIENT_DEBRIS.getDefaultState())) exp = 30;
 
         if (exp != 0) {
             var mainHand = player.getMainHandStack().getItem();
