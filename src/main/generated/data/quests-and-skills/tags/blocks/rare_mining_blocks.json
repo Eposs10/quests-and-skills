@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian",
+    "minecraft:blue_ice",
+    "minecraft:raw_copper_block",
+    "minecraft:raw_iron_block",
+    "minecraft:amethyst_block",
+    "minecraft:amethyst_cluster",
+    "minecraft:large_amethyst_bud"
+  ]
+}
