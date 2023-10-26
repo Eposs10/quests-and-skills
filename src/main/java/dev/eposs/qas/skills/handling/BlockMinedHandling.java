@@ -10,6 +10,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.util.math.BlockPos;
@@ -46,12 +47,25 @@ public class BlockMinedHandling {
                 // nur Exp, wenn ausgewachsen
                 if (block.isMature(blockState)) exp = 10;
             } catch (ClassCastException e) { // Pumpkin/Melon
-                exp = 10;
+                exp = 15;
             }
         }
 
-        if (correctTool) exp = exp*2;
-        if (exp != 0) ModSkills.addSkillExp(exp, player, Skills.FARMING);
+        if (exp != 0) {
+            var mainHand = player.getMainHandStack().getItem();
+
+            long expMultiplier = 1;
+
+            if (mainHand.equals(Items.IRON_HOE)) expMultiplier = 2;
+            if (mainHand.equals(Items.DIAMOND_HOE)) expMultiplier = 3;
+            if (mainHand.equals(Items.NETHERITE_HOE)) expMultiplier = 4;
+
+            if (correctTool) expMultiplier++;
+
+            exp = (long) exp * expMultiplier;
+
+            ModSkills.addSkillExp(exp, player, Skills.FARMING);
+        }
     }
 
     private static void foraging(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
@@ -59,8 +73,21 @@ public class BlockMinedHandling {
 
         if (blockState.isIn(BlockTags.LOGS)) exp = 10;
 
-        if (correctTool) exp = exp*2;
-        if (exp != 0) ModSkills.addSkillExp(exp, player, Skills.FORAGING);
+        if (exp != 0) {
+            var mainHand = player.getMainHandStack().getItem();
+
+            long expMultiplier = 1;
+
+            if (mainHand.equals(Items.IRON_AXE)) expMultiplier = 2;
+            if (mainHand.equals(Items.DIAMOND_AXE)) expMultiplier = 3;
+            if (mainHand.equals(Items.NETHERITE_AXE)) expMultiplier = 4;
+
+            if (correctTool) expMultiplier++;
+
+            exp = (long) exp * expMultiplier;
+
+            ModSkills.addSkillExp(exp, player, Skills.FORAGING);
+        }
     }
 
     private static void mining(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
@@ -76,7 +103,20 @@ public class BlockMinedHandling {
         if (blockState.isIn(BlockTags.DIAMOND_ORES)) exp = 20;
         if (blockState.isIn(BlockTags.EMERALD_ORES)) exp = 20;
 
-        if (correctTool) exp = exp*2;
-        if (exp != 0) ModSkills.addSkillExp(exp, player, Skills.MINING);
+        if (exp != 0) {
+            var mainHand = player.getMainHandStack().getItem();
+
+            long expMultiplier = 1;
+
+            if (mainHand.equals(Items.IRON_PICKAXE)) expMultiplier = 2;
+            if (mainHand.equals(Items.DIAMOND_PICKAXE)) expMultiplier = 3;
+            if (mainHand.equals(Items.NETHERITE_PICKAXE)) expMultiplier = 4;
+
+            if (correctTool) expMultiplier++;
+
+            exp = (long) exp * expMultiplier;
+
+            ModSkills.addSkillExp(exp, player, Skills.MINING);
+        }
     }
 }

@@ -10,10 +10,10 @@ public class FishingHandling {
     public static void fishedSomething(PlayerEntity player, ItemStack stack) {
         long exp = 0;
 
-        if (stack.isIn(ModTags.Items.FISHING_FISH)) exp = 20;
-        if (stack.isIn(ModTags.Items.FISHING_JUNK)) exp = 40;
-        if (stack.isIn(ModTags.Items.FISHING_TREASURES)) exp = 100;
+        if (stack.isIn(ModTags.Items.FISHING_FISH)) exp = 50;
+        if (stack.isIn(ModTags.Items.FISHING_JUNK)) exp = 100;
+        if (stack.isIn(ModTags.Items.FISHING_TREASURES)) exp = 400;
 
-        ModSkills.addSkillExp(exp, player, Skills.FISHING);
+        if (exp != 0) ModSkills.addSkillExp(exp, player, Skills.FISHING);
     }
 }
