@@ -11,7 +11,6 @@ public class Events {
     public static void registerEvents() {
 
         // Skills
-        //ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY.register(CombatHandling::entityKilled); // Combat
         ServerLivingEntityEvents.AFTER_DEATH.register(CombatHandling::entityKilled); // Combat
         PlayerBlockBreakEvents.AFTER.register(BlockMinedHandling::afterBlockBreak); // Any Block Break
 
