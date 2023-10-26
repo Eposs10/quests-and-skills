@@ -4,7 +4,6 @@ import dev.eposs.qas.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Blocks;
-import net.minecraft.data.server.tag.TagProvider;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 
@@ -27,6 +26,11 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.NETHER_WART)
                 .add(Blocks.TORCHFLOWER)
                 .add(Blocks.PITCHER_PLANT)
+                ;
+
+        getOrCreateTagBuilder(ModTags.Blocks.MINING_SKILL_BASIC_BLOCKS)
+                .addTag(BlockTags.BASE_STONE_OVERWORLD)
+                .addTag(BlockTags.BASE_STONE_NETHER)
                 ;
     }
 }

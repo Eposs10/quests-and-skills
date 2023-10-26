@@ -10,6 +10,7 @@ import net.minecraft.registry.tag.TagKey;
 public class ModTags {
     public static class Blocks {
         public static final TagKey<Block> FARMING_SKILL = createTag("farming_skill");
+        public static final TagKey<Block> MINING_SKILL_BASIC_BLOCKS = createTag("basic_mining_blocks");
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, QuestsAndSkills.modPath(name));

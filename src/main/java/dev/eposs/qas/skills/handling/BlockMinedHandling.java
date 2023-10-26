@@ -20,13 +20,23 @@ import org.jetbrains.annotations.NotNull;
 public class BlockMinedHandling {
 
     public static void afterBlockBreak(World world, @NotNull PlayerEntity player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity) {
+        //if (player.isCreative()) return;
+
         var mainHandStack = player.getMainHandStack();
 
-        // Foraging
-        foraging(blockState, player, mainHandStack.isIn(ItemTags.AXES));
-
         // Farming
-        farming(blockState, player, mainHandStack.isIn(ItemTags.HOES));
+        var farming = farming(blockState, player, mainHandStack.isIn(ItemTags.HOES));
+        if (farming) return;
+
+        // nur Exp für blocks die nicht von Spielern platziert wurden (reset bei Server restart)
+        if (PlayerPlacedBlockPos.isOnList(blockPos)) {
+            PlayerPlacedBlockPos.removeBlockPos(blockPos);
+            return;
+        }
+
+        // Foraging
+        var foraging = foraging(blockState, player, mainHandStack.isIn(ItemTags.AXES));
+        if (foraging) return;
 
         // Mining
         if (mainHandStack.isIn(ItemTags.PICKAXES)) {
@@ -38,7 +48,7 @@ public class BlockMinedHandling {
         } else mining(blockState, player, false);
     }
 
-    private static void farming(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
+    private static boolean farming(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
         long exp = 0;
 
         if (blockState.isIn(ModTags.Blocks.FARMING_SKILL)) {
@@ -65,10 +75,12 @@ public class BlockMinedHandling {
             exp = (long) exp * expMultiplier;
 
             ModSkills.addSkillExp(exp, player, Skills.FARMING);
+            return true;
         }
+        return false;
     }
 
-    private static void foraging(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
+    private static boolean foraging(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
         long exp = 0;
 
         if (blockState.isIn(BlockTags.LOGS)) exp = 10;
@@ -87,12 +99,15 @@ public class BlockMinedHandling {
             exp = (long) exp * expMultiplier;
 
             ModSkills.addSkillExp(exp, player, Skills.FORAGING);
+            return true;
         }
+        return false;
     }
 
-    private static void mining(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
+    private static boolean mining(@NotNull BlockState blockState, PlayerEntity player, boolean correctTool) {
         long exp = 0;
 
+        if (blockState.isIn(ModTags.Blocks.MINING_SKILL_BASIC_BLOCKS)) exp = 1;
         if (blockState.isIn(BlockTags.COAL_ORES)) exp = 5;
         if (blockState.isIn(BlockTags.COPPER_ORES)) exp = 5;
         if (blockState.isIn(BlockTags.REDSTONE_ORES)) exp = 5;
@@ -117,6 +132,8 @@ public class BlockMinedHandling {
             exp = (long) exp * expMultiplier;
 
             ModSkills.addSkillExp(exp, player, Skills.MINING);
+            return true;
         }
+        return false;
     }
 }

@@ -5,7 +5,8 @@
   "mixins": [
     "ExampleMixin",
     "FishingMixin",
-    "PlayerDataMixin"
+    "PlayerDataMixin",
+    "BlockPlaceMixin"
   ],
   "injectors": {
     "defaultRequire": 1
