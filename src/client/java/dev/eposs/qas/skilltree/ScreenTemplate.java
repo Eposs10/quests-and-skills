@@ -1,5 +1,7 @@
 package dev.eposs.qas.skilltree;
 
+import dev.eposs.qas.QuestsAndSkills;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
@@ -22,6 +24,13 @@ public class ScreenTemplate extends Screen {
 
     int centerX;
     int centerY;
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderBackground(context, mouseX, mouseY, delta);
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-background.png"),
+                centerX - 210, centerY - 140, 25, 75, 600, 400, 350, 350);
+    }
 
     @Override
     protected void init() {
