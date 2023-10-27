@@ -42,10 +42,10 @@ public class ModSkills {
 
     /**
      * Adds skillExp to skill of playerEntity
+     *
      * @param exp Should be positive Number (no check)
-     * @return Total skillExp
      */
-    public static long addSkillExp(long exp, PlayerEntity playerEntity, @NotNull Skills skill) {
+    public static void addSkillExp(long exp, PlayerEntity playerEntity, @NotNull Skills skill) {
         var skillData = getSkills(playerEntity);
         var currentExp = skillData.getLong(skill.getName());
 
@@ -55,12 +55,10 @@ public class ModSkills {
         // Exp gain Sound
         playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
         // Level up Sound
-        if ( (newExp%1000) < (currentExp%1000) ) { // only after Level Up
-            playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.1f, 2.0f);
+        if ( (newExp % Skill.xpPerLevel) < (currentExp % Skill.xpPerLevel) ) { // only after Level Up
+            playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.5f, 2.0f);
         }
         // Exp gain display
         playerEntity.sendMessage(Text.literal("+" + exp + " - " + skill.getName() + " " + newExp / Skill.xpPerLevel + " [ " + newExp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]").formatted(Formatting.AQUA), true);
-
-        return newExp;
     }
 }
