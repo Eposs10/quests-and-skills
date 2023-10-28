@@ -5,6 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 
 public class ScreenTemplate extends Screen {
@@ -25,17 +26,21 @@ public class ScreenTemplate extends Screen {
     int centerX;
     int centerY;
 
-    @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
-        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-background.png"),
-                centerX - 210, centerY - 140, 25, 75, 600, 400, 350, 350);
-    }
+    int topX;
+    int topY;
+    int bottomX;
+    int bottomY;
+
 
     @Override
     protected void init() {
         centerX = this.width / 2;
         centerY = this.height / 2;
+
+        topX = centerX - 210;
+        topY = centerY - 140;
+        bottomX = centerX + 210;
+        bottomY = centerY + 140;
 
         title = new TextWidget(titleText, this.textRenderer);
         title.setX(centerX - (title.getWidth()/2));
@@ -68,6 +73,7 @@ public class ScreenTemplate extends Screen {
         opt1 = ButtonWidget.builder(
                 Text.of("Opt1"),
                 button -> {
+
                 }
         ).dimensions(centerX - 200, centerY + 40, 60, 20).build();
 
@@ -78,5 +84,28 @@ public class ScreenTemplate extends Screen {
         addDrawableChild(skillTree);
         addDrawableChild(opt0);
         addDrawableChild(opt1);
+
+    }
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderBackground(context, mouseX, mouseY, delta);
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-background.png"),
+                topX, topY, 0, 0, 420, 280, 420, 280);
+    }
+
+    @Override
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.render(context, mouseX, mouseY, delta);
+
+        context.drawVerticalLine(RenderLayer.getGuiOverlay(), centerX-150, topY, bottomY, 0xffffff);
+
+        // Screen Ecken
+        /*
+        context.drawText(textRenderer, "X", topX, topY, 0xffffff, false);
+        context.drawText(textRenderer, "X", topX, bottomY, 0xffffff, false);
+        context.drawText(textRenderer, "X", bottomX, topY, 0xffffff, false);
+        context.drawText(textRenderer, "X", bottomX, bottomY, 0xffffff, false);
+        */
     }
 }
