@@ -1,6 +1,6 @@
 package dev.eposs.qas;
 
-import dev.eposs.qas.skilltree.ScreenTestCommand;
+import dev.eposs.qas.screens.ScreenTestCommand;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 

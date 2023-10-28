@@ -1,19 +1,21 @@
-package dev.eposs.qas.skilltree;
+package dev.eposs.qas.screens;
 
 import dev.eposs.qas.QuestsAndSkills;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 
-public class ScreenTemplate extends Screen {
+public abstract class ScreenTemplate extends Screen {
     protected ScreenTemplate() {
         super(titleText);
     }
 
     static final Text titleText = Text.of("Vanilla+ Quests and Skills");
+
+    MinecraftClient mc = MinecraftClient.getInstance();
 
     ButtonWidget mainMenu;
     ButtonWidget recipes;
@@ -48,20 +50,17 @@ public class ScreenTemplate extends Screen {
 
         mainMenu = ButtonWidget.builder(
                 Text.of("Main Menu"),
-                button -> {
-                }
+                button -> mc.setScreen(new MainMenuScreen())
         ).dimensions(centerX - 200, centerY - 80, 60, 20).build();
 
         recipes = ButtonWidget.builder(
                 Text.of("Recipes"),
-                button -> {
-                }
+                button -> mc.setScreen(new RecipesScreen())
         ).dimensions(centerX - 200, centerY - 50, 60, 20).build();
 
         skillTree = ButtonWidget.builder(
                 Text.of("Skill Tree"),
-                button -> {
-                }
+                button -> mc.setScreen(new SkillTreeScreen())
         ).dimensions(centerX - 200, centerY - 20, 60, 20).build();
 
         opt0 = ButtonWidget.builder(
@@ -73,7 +72,6 @@ public class ScreenTemplate extends Screen {
         opt1 = ButtonWidget.builder(
                 Text.of("Opt1"),
                 button -> {
-
                 }
         ).dimensions(centerX - 200, centerY + 40, 60, 20).build();
 
@@ -84,7 +82,6 @@ public class ScreenTemplate extends Screen {
         addDrawableChild(skillTree);
         addDrawableChild(opt0);
         addDrawableChild(opt1);
-
     }
 
     @Override
@@ -97,8 +94,6 @@ public class ScreenTemplate extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-
-        context.drawVerticalLine(RenderLayer.getGuiOverlay(), centerX-150, topY, bottomY, 0xffffff);
 
         // Screen Ecken
         /*

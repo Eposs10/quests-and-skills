@@ -1,4 +1,4 @@
-package dev.eposs.qas.skilltree;
+package dev.eposs.qas.screens;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.minecraft.client.MinecraftClient;
@@ -12,7 +12,7 @@ public class ScreenTestCommand {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess, CommandManager.RegistrationEnvironment registrationEnvironment) {
         dispatcher.register(CommandManager.literal("screentest")
                 .executes(context -> {
-                    mc.send(() -> mc.setScreen(new ScreenTemplate()));
+                    mc.send(() -> mc.setScreen(new MainMenuScreen()));
                     return 1;
                 })
         );
