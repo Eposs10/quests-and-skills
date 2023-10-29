@@ -80,8 +80,8 @@ public abstract class ScreenTemplate extends Screen {
         addDrawableChild(mainMenu);
         addDrawableChild(recipes);
         addDrawableChild(skillTree);
-        addDrawableChild(opt0);
-        addDrawableChild(opt1);
+        //addDrawableChild(opt0);
+        //addDrawableChild(opt1);
     }
 
     @Override
