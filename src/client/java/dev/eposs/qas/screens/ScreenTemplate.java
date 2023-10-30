@@ -90,7 +90,8 @@ public abstract class ScreenTemplate extends Screen {
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
-        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg.png"),
+        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-text.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 
