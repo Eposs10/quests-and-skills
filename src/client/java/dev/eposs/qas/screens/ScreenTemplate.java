@@ -6,6 +6,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 
 public abstract class ScreenTemplate extends Screen {
@@ -13,7 +14,9 @@ public abstract class ScreenTemplate extends Screen {
         super(titleText);
     }
 
-    static final Text titleText = Text.of("Vanilla+ Quests and Skills");
+    static final Text titleText = Text.literal("Vanilla+ Quests and Skills").setStyle(
+            Style.EMPTY.withBold(true)
+    );
 
     MinecraftClient mc = MinecraftClient.getInstance();
 
@@ -87,7 +90,7 @@ public abstract class ScreenTemplate extends Screen {
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
-        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-background.png"),
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 
