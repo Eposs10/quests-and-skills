@@ -1,5 +1,7 @@
 package dev.eposs.qas.screens;
 
+import net.minecraft.client.gui.DrawContext;
+
 public class MainMenuScreen extends ScreenTemplate {
 
     @Override
@@ -7,5 +9,11 @@ public class MainMenuScreen extends ScreenTemplate {
         super.init();
 
         this.mainMenu.active = false;
+    }
+
+    @Override
+    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
+        super.renderBackground(context, mouseX, mouseY, delta);
+        drawBg(context);
     }
 }

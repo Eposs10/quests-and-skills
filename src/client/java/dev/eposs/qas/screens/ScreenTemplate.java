@@ -8,6 +8,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.TextWidget;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class ScreenTemplate extends Screen {
     protected ScreenTemplate() {
@@ -88,14 +89,6 @@ public abstract class ScreenTemplate extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
-        super.renderBackground(context, mouseX, mouseY, delta);
-        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
-        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-text.png"),
-                topX, topY, 0, 0, 420, 280, 420, 280);
-    }
-
-    @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
@@ -106,5 +99,17 @@ public abstract class ScreenTemplate extends Screen {
         context.drawText(textRenderer, "X", bottomX, topY, 0xffffff, false);
         context.drawText(textRenderer, "X", bottomX, bottomY, 0xffffff, false);
         */
+    }
+
+    void drawBg(@NotNull DrawContext context) {
+        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg.png"),
+                topX, topY, 0, 0, 420, 280, 420, 280);
+    }
+
+    void drawBgText(@NotNull DrawContext context) {
+        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-text.png"),
+                topX, topY, 0, 0, 420, 280, 420, 280);
     }
 }
