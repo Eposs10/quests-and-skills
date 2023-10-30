@@ -48,8 +48,9 @@ public class SkillTreeManagement {
      * @param key Skill
      * @param element Skill Tree Element
      * @param level current level of element
+     * @throws IllegalArgumentException if key is not valid
      */
-    public static void saveCurrentLevelToNbt(PlayerEntity playerEntity, String key, ST_PathElement element, int level) {
+    public static void saveCurrentLevelToNbt(PlayerEntity playerEntity, String key, ST_PathElement element, int level) throws IllegalArgumentException {
         if (!ST_KEYS.contains(key)) throw new IllegalArgumentException(key + " is not in ST_KEYS.");
 
         var player = (IPlayerDataSaver) playerEntity;
@@ -62,13 +63,14 @@ public class SkillTreeManagement {
     }
 
     /**
-     *
+
      * @param playerEntity Player
      * @param key Skill
      * @param element Skill Tree Element
      * @return Level of element, or 0 if no value in NBT
+     * @throws IllegalArgumentException if key is not valid
      */
-    public static int getCurrentLevel(PlayerEntity playerEntity, String key ,ST_PathElement element) {
+    public static int getCurrentLevel(PlayerEntity playerEntity, String key ,ST_PathElement element) throws IllegalArgumentException {
         if (!ST_KEYS.contains(key)) throw new IllegalArgumentException(key + " is not in ST_KEYS.");
 
         var player = (IPlayerDataSaver) playerEntity;
