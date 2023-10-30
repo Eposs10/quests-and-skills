@@ -19,23 +19,23 @@ public abstract class ScreenTemplate extends Screen {
             Style.EMPTY.withBold(true).withUnderline(true)
     );
 
-    MinecraftClient mc = MinecraftClient.getInstance();
+    static MinecraftClient mc = MinecraftClient.getInstance();
 
-    ButtonWidget mainMenu;
-    ButtonWidget recipes;
-    ButtonWidget skillTree;
-    ButtonWidget opt0;
-    ButtonWidget opt1;
+    protected ButtonWidget mainMenu;
+    protected ButtonWidget recipes;
+    protected ButtonWidget skillTree;
+    protected ButtonWidget opt0;
+    protected ButtonWidget opt1;
 
-    TextWidget title;
+    private TextWidget title;
 
-    int centerX;
-    int centerY;
+    protected int centerX;
+    protected int centerY;
 
-    int topX;
-    int topY;
-    int bottomX;
-    int bottomY;
+    protected int topX;
+    protected int topY;
+    protected int bottomX;
+    protected int bottomY;
 
 
     @Override
