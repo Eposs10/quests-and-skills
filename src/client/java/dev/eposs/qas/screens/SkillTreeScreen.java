@@ -14,6 +14,6 @@ public class SkillTreeScreen extends ScreenTemplate {
     @Override
     public void renderBackground(DrawContext context, int mouseX, int mouseY, float delta) {
         super.renderBackground(context, mouseX, mouseY, delta);
-        drawBg(context);
+        drawBgST(context);
     }
 }

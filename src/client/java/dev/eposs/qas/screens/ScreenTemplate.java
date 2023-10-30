@@ -102,14 +102,20 @@ public abstract class ScreenTemplate extends Screen {
     }
 
     void drawBg(@NotNull DrawContext context) {
-        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
+        // 2370x1580 | Title P(235/60) 1900x140
         context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 
     void drawBgText(@NotNull DrawContext context) {
-        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450?|260) x1260
+        // 2370x1580 | Title P(235/60) 1900x140 | Text P(450|260) 1860x1260
         context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-text.png"),
+                topX, topY, 0, 0, 420, 280, 420, 280);
+    }
+
+    void drawBgST(@NotNull DrawContext context) {
+        // 2370x1580 | Title P(235/60) 1900x140 | Tree P(450|260) 1240x1260 | Text P(1750/260) 560x
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-st.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 }
