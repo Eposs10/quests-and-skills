@@ -39,7 +39,8 @@ public class SkillTreeManagement {
     public static final ST_Element FISHING_ROOT = new ST_Element("Fishing", Set.of(FISHING_LUCK, FISHING_SPEED, FISHING_CONDUIT));
 
     public static final ST_PathElement EXPLORING_WALK_SPEED = new ST_PathElement("Walk Speed", 19, 9);
-    public static final ST_Element EXPLORING_ROOT = new ST_Element("Exploring", Set.of(EXPLORING_WALK_SPEED));
+    public static final ST_PathElement EXPLORING_FEATHER_FALLING = new ST_PathElement("Feather Falling", 5, 3);
+    public static final ST_Element EXPLORING_ROOT = new ST_Element("Exploring", Set.of(EXPLORING_WALK_SPEED, EXPLORING_FEATHER_FALLING));
 
 
     /**
