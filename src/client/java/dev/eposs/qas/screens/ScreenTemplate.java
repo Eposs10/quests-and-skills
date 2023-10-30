@@ -16,7 +16,7 @@ public abstract class ScreenTemplate extends Screen {
     }
 
     static final Text titleText = Text.literal("Vanilla+ Quests and Skills").setStyle(
-            Style.EMPTY.withBold(true)
+            Style.EMPTY.withBold(true).withUnderline(true)
     );
 
     MinecraftClient mc = MinecraftClient.getInstance();
@@ -115,7 +115,7 @@ public abstract class ScreenTemplate extends Screen {
 
     void drawBgST(@NotNull DrawContext context) {
         // 2370x1580 | Title P(235/60) 1900x140 | Tree P(450|260) 1240x1260 | Text P(1750/260) 560x
-        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-st.png"),
+        context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-st1.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 }
