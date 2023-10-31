@@ -130,7 +130,10 @@ public class SkillTreeScreen extends ScreenTemplate {
         ).dimensions(bottomX - 100, bottomY - 50, 80, 20).build();
         unlock_BW.active = costSP > 0;
 
-        combat_BW = button(Text.of("🗡"), skillX0, skill1Y, new StSkillScreen(SkillTree.COMBAT_ROOT));
+        combat_BW = button(Text.of(""), skillX0, skill1Y, new StSkillScreen(SkillTree.COMBAT_ROOT));
+        combat_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_sword.png"), 16, 16);
+        combat_IW.setX(skillX0 + 2);
+        combat_IW.setY(skill1Y + 2);
 
         combat_health_BW = button(Text.of(""), skillX1, skill1Y, new StSkillScreen(SkillTree.COMBAT_HEALTH));
         combat_health_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/health_boost.png"), 18, 18);
@@ -147,15 +150,75 @@ public class SkillTreeScreen extends ScreenTemplate {
         combat_range_IW.setX(skillX3 + 1);
         combat_range_IW.setY(skill1Y + 1);
 
-        mining_BW = button(Text.of("⛏"), skillX0, skill2Y, new StSkillScreen(SkillTree.MINING_ROOT));
+        mining_BW = button(Text.of(""), skillX0, skill2Y, new StSkillScreen(SkillTree.MINING_ROOT));
+        mining_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_pickaxe.png"), 16, 16);
+        mining_IW.setX(skillX0 + 2);
+        mining_IW.setY(skill2Y + 2);
 
-        foraging_BW = button(Text.of("🪓"), skillX0, skill3Y, new StSkillScreen(SkillTree.FORAGING_ROOT));
+        mining_haste_BW = button(Text.of(""), skillX1, skill2Y, new StSkillScreen(SkillTree.MINING_HASTE));
+        mining_haste_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/haste.png"), 18, 18);
+        mining_haste_IW.setX(skillX1 + 1);
+        mining_haste_IW.setY(skill2Y + 1);
 
-        farming_BW = button(Text.of("🌾"), skillX0, skill4Y, new StSkillScreen(SkillTree.FARMING_ROOT));
+        mining_range_BW = button(Text.of(""), skillX2, skill2Y, new StSkillScreen(SkillTree.MINING_REACH));
+        mining_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
+        mining_range_IW.setX(skillX2 + 1);
+        mining_range_IW.setY(skill2Y + 1);
 
-        fishing_BW = button(Text.of("🎣"), skillX0, skill5Y, new StSkillScreen(SkillTree.FISHING_ROOT));
+        foraging_BW = button(Text.of(""), skillX0, skill3Y, new StSkillScreen(SkillTree.FORAGING_ROOT));
+        foraging_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_axe.png"), 16, 16);
+        foraging_IW.setX(skillX0 + 2);
+        foraging_IW.setY(skill3Y + 2);
 
-        exploring_BW = button(Text.of("👞"), skillX0, skill6Y, new StSkillScreen(SkillTree.EXPLORING_ROOT));
+        foraging_haste_BW = button(Text.of(""), skillX1, skill3Y, new StSkillScreen(SkillTree.FORAGING_HASTE));
+        foraging_haste_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/haste.png"), 18, 18);
+        foraging_haste_IW.setX(skillX1 + 1);
+        foraging_haste_IW.setY(skill3Y + 1);
+
+        foraging_range_BW = button(Text.of(""), skillX2, skill3Y, new StSkillScreen(SkillTree.FORAGING_REACH));
+        foraging_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
+        foraging_range_IW.setX(skillX2 + 1);
+        foraging_range_IW.setY(skill3Y + 1);
+
+        farming_BW = button(Text.of(""), skillX0, skill4Y, new StSkillScreen(SkillTree.FARMING_ROOT));
+        farming_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_hoe.png"), 16, 16);
+        farming_IW.setX(skillX0 + 2);
+        farming_IW.setY(skill4Y + 2);
+
+        fishing_BW = button(Text.of(""), skillX0, skill5Y, new StSkillScreen(SkillTree.FISHING_ROOT));
+        fishing_IW = IconWidget.create(16, 16, new Identifier("textures/item/fishing_rod.png"), 16, 16);
+        fishing_IW.setX(skillX0 + 2);
+        fishing_IW.setY(skill5Y + 2);
+
+        fishing_luck_BW = button(Text.of(""), skillX1, skill5Y, new StSkillScreen(SkillTree.FISHING_LUCK));
+        fishing_luck_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/luck.png"), 18, 18);
+        fishing_luck_IW.setX(skillX1 + 1);
+        fishing_luck_IW.setY(skill5Y + 1);
+
+        fishing_speed_BW = button(Text.of(""), skillX2, skill5Y, new StSkillScreen(SkillTree.FISHING_SPEED));
+        fishing_speed_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/dolphins_grace.png"), 18, 18);
+        fishing_speed_IW.setX(skillX2 + 1);
+        fishing_speed_IW.setY(skill5Y + 1);
+
+        fishing_conduit_BW = button(Text.of(""), skillX3, skill5Y, new StSkillScreen(SkillTree.FISHING_CONDUIT));
+        fishing_conduit_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/conduit_power.png"), 18, 18);
+        fishing_conduit_IW.setX(skillX3 + 1);
+        fishing_conduit_IW.setY(skill5Y + 1);
+
+        exploring_BW = button(Text.of(""), skillX0, skill6Y, new StSkillScreen(SkillTree.EXPLORING_ROOT));
+        exploring_IW = IconWidget.create(16, 16, new Identifier("textures/item/elytra.png"), 16, 16);
+        exploring_IW.setX(skillX0 + 2);
+        exploring_IW.setY(skill6Y + 2);
+
+        exploring_speed_BW = button(Text.of(""), skillX1, skill6Y, new StSkillScreen(SkillTree.EXPLORING_WALK_SPEED));
+        exploring_speed_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/speed.png"), 18, 18);
+        exploring_speed_IW.setX(skillX1 + 1);
+        exploring_speed_IW.setY(skill6Y + 1);
+
+        exploring_falling_BW = button(Text.of(""), skillX2, skill6Y, new StSkillScreen(SkillTree.EXPLORING_FEATHER_FALLING));
+        exploring_falling_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/slow_falling.png"), 18, 18);
+        exploring_falling_IW.setX(skillX2 + 1);
+        exploring_falling_IW.setY(skill6Y + 1);
 
 
         addDrawableChild(TW_skillTitle);
@@ -165,6 +228,7 @@ public class SkillTreeScreen extends ScreenTemplate {
         addDrawableChild(unlock_BW);
 
         addDrawableChild(combat_BW);
+        addDrawableChild(combat_IW);
         addDrawableChild(combat_health_BW);
         addDrawableChild(combat_health_IW);
         addDrawableChild(combat_regeneration_BW);
@@ -173,14 +237,35 @@ public class SkillTreeScreen extends ScreenTemplate {
         addDrawableChild(combat_range_IW);
 
         addDrawableChild(mining_BW);
+        addDrawableChild(mining_IW);
+        addDrawableChild(mining_haste_BW);
+        addDrawableChild(mining_haste_IW);
+        addDrawableChild(mining_range_BW);
+        addDrawableChild(mining_range_IW);
 
         addDrawableChild(foraging_BW);
+        addDrawableChild(foraging_IW);
+        addDrawableChild(foraging_haste_BW);
+        addDrawableChild(foraging_haste_IW);
+        addDrawableChild(foraging_range_BW);
+        addDrawableChild(foraging_range_IW);
 
         addDrawableChild(farming_BW);
+        addDrawableChild(farming_IW);
 
         addDrawableChild(fishing_BW);
+        addDrawableChild(fishing_IW);
+        addDrawableChild(fishing_luck_BW);
+        addDrawableChild(fishing_luck_IW);
+        addDrawableChild(fishing_speed_BW);
+        addDrawableChild(fishing_speed_IW);
 
         addDrawableChild(exploring_BW);
+        addDrawableChild(exploring_IW);
+        addDrawableChild(exploring_speed_BW);
+        addDrawableChild(exploring_speed_IW);
+        addDrawableChild(exploring_falling_BW);
+        addDrawableChild(exploring_falling_IW);
 
     }
 

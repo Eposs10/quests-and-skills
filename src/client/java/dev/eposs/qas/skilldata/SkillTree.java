@@ -13,12 +13,12 @@ public class SkillTree {
     public static final SkillTreeElement COMBAT_ATTACK_RANGE = new SkillTreeElement("Attack Range", 5, 3, SkillTreeElement.unlockCost5Expensive);
     public static final SkillTreeElement COMBAT_ROOT = new SkillTreeElement("Combat", 1, 1, SkillTreeElement.rootCost);
 
-    public static final SkillTreeElement MINING_HASTE = new SkillTreeElement("Haste (with Pickaxe)", 5, 3, SkillTreeElement.unlockCost5);
-    public static final SkillTreeElement MINING_REACH = new SkillTreeElement("Reach (with Pickaxe)", 5, 3, SkillTreeElement.unlockCost5Expensive);
+    public static final SkillTreeElement MINING_HASTE = new SkillTreeElement("Pickaxe Haste", 5, 3, SkillTreeElement.unlockCost5);
+    public static final SkillTreeElement MINING_REACH = new SkillTreeElement("Pickaxe Reach", 5, 3, SkillTreeElement.unlockCost5Expensive);
     public static final SkillTreeElement MINING_ROOT = new SkillTreeElement("Mining", 1, 1, SkillTreeElement.rootCost);
 
-    public static final SkillTreeElement FORAGING_HASTE = new SkillTreeElement("Haste (with Axe)", 5, 3, SkillTreeElement.unlockCost5);
-    public static final SkillTreeElement FORAGING_REACH = new SkillTreeElement("Reach (with Axe)", 5, 3, SkillTreeElement.unlockCost5Expensive);
+    public static final SkillTreeElement FORAGING_HASTE = new SkillTreeElement("Axe Haste", 5, 3, SkillTreeElement.unlockCost5);
+    public static final SkillTreeElement FORAGING_REACH = new SkillTreeElement("Axe Reach", 5, 3, SkillTreeElement.unlockCost5Expensive);
     public static final SkillTreeElement FORAGING_ROOT = new SkillTreeElement("Foraging", 1, 1, SkillTreeElement.rootCost);
 
     public static final SkillTreeElement FARMING_ROOT = new SkillTreeElement("Farming", 1, 1, SkillTreeElement.rootCost);
