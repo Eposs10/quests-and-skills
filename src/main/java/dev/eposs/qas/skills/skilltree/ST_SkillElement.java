@@ -12,4 +12,8 @@ public class ST_SkillElement {
         this.rootName = rootName;
         this.elements = elements;
     }
+
+    String getNameAsNbtKey() {
+        return rootName.toLowerCase().replaceAll(" ", "_");
+    }
 }

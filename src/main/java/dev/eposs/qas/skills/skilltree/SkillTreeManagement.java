@@ -53,11 +53,47 @@ public class SkillTreeManagement {
 
     public static final ST_SkillElement RESET = new ST_SkillElement("Reset Skill Tree", Set.of());
 
+    /**
+     * @param playerEntity Player
+     * @param key          Skill
+     * @param element      Skill Tree Element
+     * @param state        unlocked true/false
+     * @throws IllegalArgumentException if key is not valid
+     */
+    public static void saveUnlockedSkill(PlayerEntity playerEntity, String key, ST_SkillElement element, boolean state) throws IllegalArgumentException {
+        if (!ST_KEYS.contains(key)) throw new IllegalArgumentException(key + " is not in ST_KEYS.");
+
+        var player = (IPlayerDataSaver) playerEntity;
+        var st_data = player.getPersistentData().getCompound(ST_ROOT);
+
+        var skill_data = st_data.getCompound(key);
+        skill_data.putBoolean(element.getNameAsNbtKey(), state);
+
+        player.getPersistentData().put(key, skill_data);
+    }
 
     /**
      * @param playerEntity Player
      * @param key          Skill
      * @param element      Skill Tree Element
+     * @return unlocked true/false
+     * @throws IllegalArgumentException if key is not valid
+     */
+    public static boolean isSkillUnlocked(PlayerEntity playerEntity, String key, ST_SkillElement element) throws IllegalArgumentException {
+        if (!ST_KEYS.contains(key)) throw new IllegalArgumentException(key + " is not in ST_KEYS.");
+
+        var player = (IPlayerDataSaver) playerEntity;
+        var st_data = player.getPersistentData().getCompound(ST_ROOT);
+
+        var skill_data = st_data.getCompound(key);
+
+        return skill_data.getBoolean(element.getNameAsNbtKey());
+    }
+
+    /**
+     * @param playerEntity Player
+     * @param key          Skill
+     * @param element      Skill Tree Path Element
      * @param level        current level of element
      * @throws IllegalArgumentException if key is not valid
      */
@@ -76,7 +112,7 @@ public class SkillTreeManagement {
     /**
      * @param playerEntity Player
      * @param key          Skill
-     * @param element      Skill Tree Element
+     * @param element      Skill Tree Path Element
      * @return Level of element, or 0 if no value in NBT
      * @throws IllegalArgumentException if key is not valid
      */
