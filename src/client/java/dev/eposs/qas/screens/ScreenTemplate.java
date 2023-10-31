@@ -24,11 +24,11 @@ public abstract class ScreenTemplate extends Screen {
 
     private TextWidget TW_title;
 
-    protected ButtonWidget BW_mainMenu;
-    protected ButtonWidget BW_recipes;
-    protected ButtonWidget BW_skillTree;
-    protected ButtonWidget BW_opt0;
-    protected ButtonWidget BW_opt1;
+    protected ButtonWidget mainMenu_BW;
+    protected ButtonWidget recipes_BW;
+    protected ButtonWidget skillTree_BW;
+    protected ButtonWidget opt0_BW;
+    protected ButtonWidget opt1_BW;
 
     protected int centerX;
     protected int centerY;
@@ -53,28 +53,28 @@ public abstract class ScreenTemplate extends Screen {
         TW_title.setX(centerX - (TW_title.getWidth()/2));
         TW_title.setY(centerY - 120);
 
-        BW_mainMenu = ButtonWidget.builder(
+        mainMenu_BW = ButtonWidget.builder(
                 Text.of("Main Menu"),
                 button -> mc.setScreen(new MainMenuScreen())
         ).dimensions(centerX - 200, centerY - 80, 60, 20).build();
 
-        BW_recipes = ButtonWidget.builder(
+        recipes_BW = ButtonWidget.builder(
                 Text.of("Recipes"),
                 button -> mc.setScreen(new RecipesScreen())
         ).dimensions(centerX - 200, centerY - 50, 60, 20).build();
 
-        BW_skillTree = ButtonWidget.builder(
+        skillTree_BW = ButtonWidget.builder(
                 Text.of("Skill Tree"),
                 button -> mc.setScreen(new SkillTreeScreen())
         ).dimensions(centerX - 200, centerY - 20, 60, 20).build();
 
-        BW_opt0 = ButtonWidget.builder(
+        opt0_BW = ButtonWidget.builder(
                 Text.of("Opt0"),
                 button -> {
                 }
         ).dimensions(centerX - 200, centerY + 10, 60, 20).build();
 
-        BW_opt1 = ButtonWidget.builder(
+        opt1_BW = ButtonWidget.builder(
                 Text.of("Opt1"),
                 button -> {
                 }
@@ -82,9 +82,9 @@ public abstract class ScreenTemplate extends Screen {
 
         addDrawableChild(TW_title);
 
-        addDrawableChild(BW_mainMenu);
-        addDrawableChild(BW_recipes);
-        addDrawableChild(BW_skillTree);
+        addDrawableChild(mainMenu_BW);
+        addDrawableChild(recipes_BW);
+        addDrawableChild(skillTree_BW);
         //addDrawableChild(opt0);
         //addDrawableChild(opt1);
     }

@@ -1,9 +1,11 @@
 package dev.eposs.qas.skills.skilltree;
 
 public class ST_PathElement {
-    final String name;
-    final int maxLevel;
-    final int unlockNextPathElement;
+    public static ST_PathElement EMPTY = new ST_PathElement("", 0, 0);
+
+    public final String name;
+    public final int maxLevel;
+    public final int unlockNextPathElement;
 
     ST_PathElement(String name, int maxLevel, int unlockNextPathElement) {
         this.name = name;

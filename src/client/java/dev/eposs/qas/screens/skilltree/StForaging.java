@@ -6,7 +6,7 @@ public class StForaging extends SkillTreeScreen {
     protected void init() {
         super.init();
 
-        this.BW_foraging.active = false;
-        this.BW_skillTree.active = true;
+        this.foraging_BW.active = false;
+        this.skillTree_BW.active = true;
     }
 }

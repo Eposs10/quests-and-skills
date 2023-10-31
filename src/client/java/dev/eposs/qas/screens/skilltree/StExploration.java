@@ -6,7 +6,7 @@ public class StExploration extends SkillTreeScreen {
     protected void init() {
         super.init();
 
-        this.BW_exploration.active = false;
-        this.BW_skillTree.active = true;
+        this.exploration_BW.active = false;
+        this.skillTree_BW.active = true;
     }
 }

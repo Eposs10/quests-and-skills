@@ -6,7 +6,7 @@ public class StMining extends SkillTreeScreen {
     protected void init() {
         super.init();
 
-        this.BW_mining.active = false;
-        this.BW_skillTree.active = true;
+        this.mining_BW.active = false;
+        this.skillTree_BW.active = true;
     }
 }

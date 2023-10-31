@@ -6,7 +6,7 @@ public class StFishing extends SkillTreeScreen {
     protected void init() {
         super.init();
 
-        this.BW_fishing.active = false;
-        this.BW_skillTree.active = true;
+        this.fishing_BW.active = false;
+        this.skillTree_BW.active = true;
     }
 }

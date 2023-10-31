@@ -8,7 +8,7 @@ public class RecipesScreen extends ScreenTemplate {
     protected void init() {
         super.init();
 
-        this.BW_recipes.active = false;
+        this.recipes_BW.active = false;
     }
 
     @Override
