@@ -1,6 +1,6 @@
 package dev.eposs.qas.mixin;
 
-import dev.eposs.qas.skills.handling.PlayerPlacedBlockPos;
+import dev.eposs.qas.skills.exp.PlayerPlacedBlockPos;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.util.ActionResult;

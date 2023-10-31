@@ -4,8 +4,9 @@ import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.playerdata.PlayerDataKeeper;
 import dev.eposs.qas.skills.ModSkills;
 import dev.eposs.qas.skills.SkillPointsHandler;
-import dev.eposs.qas.skills.handling.BlockMinedHandling;
-import dev.eposs.qas.skills.handling.CombatHandling;
+import dev.eposs.qas.skills.SkillTreeDataHandler;
+import dev.eposs.qas.skills.exp.BlockMinedHandling;
+import dev.eposs.qas.skills.exp.CombatHandling;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -27,6 +28,7 @@ public class Events {
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             var player = handler.getPlayer();
             SkillPointsHandler.initialSync(player);
+            SkillTreeDataHandler.initialSync(player);
         });
 
         // Packet handling (Skill Points)
@@ -34,6 +36,15 @@ public class Events {
             var clientSkillPoints = buf.readLong();
             server.execute(() -> {
                 SkillPointsHandler.setSkillPoints(player, clientSkillPoints, false);
+                QuestsAndSkills.LOGGER.info("C2S: Skill Points synced.");
+            });
+        });
+
+        // Packet handling (Skill Points)
+        ServerPlayNetworking.registerGlobalReceiver(QuestsAndSkills.modPath(ModSkills.ST_ROOT + "_c2s"), (server, player, handler, buf, responseSender) -> {
+            var clientData = buf.readNbt();
+            server.execute(() -> {
+                SkillTreeDataHandler.setData(player, clientData);
                 QuestsAndSkills.LOGGER.info("C2S: Skill Points synced.");
             });
         });

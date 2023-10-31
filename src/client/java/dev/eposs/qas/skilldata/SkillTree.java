@@ -1,8 +1,6 @@
 package dev.eposs.qas.skilldata;
 
-import dev.eposs.qas.playerdata.IPlayerDataSaver;
-import dev.eposs.qas.skills.ModSkills;
-import net.minecraft.entity.player.PlayerEntity;
+import dev.eposs.qas.QuestsAndSkillsClient;
 import org.jetbrains.annotations.NotNull;
 
 public class SkillTree {
@@ -35,30 +33,19 @@ public class SkillTree {
     public static final SkillTreeElement RESET = new SkillTreeElement("Reset", 1, 1, new int[100]);
 
     /**
-     * @param playerEntity Player
      * @param element      Skill Tree Path Element
      * @param level        current level of element
-     * @throws IllegalArgumentException if key is not valid
      */
-    public static void saveCurrentLevelToNbt(PlayerEntity playerEntity, @NotNull SkillTreeElement element, int level) throws IllegalArgumentException {
-        var player = (IPlayerDataSaver) playerEntity;
-        var st_data = player.getPersistentData().getCompound(ModSkills.ST_ROOT);
-
-        st_data.putInt(element.getNameAsNbtKey(), level);
-
-        player.getPersistentData().put(ModSkills.ST_ROOT, st_data);
+    public static void saveCurrentLevelToNbt(@NotNull SkillTreeElement element, int level) {
+        QuestsAndSkillsClient.skillTreeData.putInt(element.getNameAsNbtKey(), level);
+        QuestsAndSkillsClient.syncSkillTreeDataToServer();
     }
 
     /**
-     * @param playerEntity Player
      * @param element      Skill Tree Path Element
      * @return Level of element, or 0 if no value in NBT
-     * @throws IllegalArgumentException if key is not valid
      */
-    public static int getCurrentLevel(PlayerEntity playerEntity, @NotNull SkillTreeElement element) throws IllegalArgumentException {
-        var player = (IPlayerDataSaver) playerEntity;
-        var st_data = player.getPersistentData().getCompound(ModSkills.ST_ROOT);
-
-        return st_data.getInt(element.getNameAsNbtKey());
+    public static int getCurrentLevel(@NotNull SkillTreeElement element) {
+        return QuestsAndSkillsClient.skillTreeData.getInt(element.getNameAsNbtKey());
     }
 }

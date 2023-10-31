@@ -1,4 +1,4 @@
-package dev.eposs.qas.skills.handling;
+package dev.eposs.qas.skills.exp;
 
 import dev.eposs.qas.skills.ModSkills;
 import dev.eposs.qas.skills.Skills;

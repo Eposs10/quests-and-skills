@@ -1,7 +1,7 @@
 package dev.eposs.qas.items.custom;
 
 import dev.eposs.qas.skills.ModSkills;
-import dev.eposs.qas.skills.Skills;
+import dev.eposs.qas.skills.SkillTreeDataHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,6 +23,9 @@ public class TestItem extends Item {
 
             var skills = ModSkills.getSkills(user);
             user.sendMessage(Text.of(skills.asString()), false);
+
+            var skillTree = SkillTreeDataHandler.getData(user);
+            user.sendMessage(Text.of(skillTree.asString()), false);
 
             return TypedActionResult.success(stack, false);
         }

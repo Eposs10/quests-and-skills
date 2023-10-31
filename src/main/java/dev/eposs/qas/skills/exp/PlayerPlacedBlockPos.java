@@ -1,4 +1,4 @@
-package dev.eposs.qas.skills.handling;
+package dev.eposs.qas.skills.exp;
 
 import net.minecraft.util.math.BlockPos;
 

@@ -16,6 +16,7 @@ import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -130,10 +131,10 @@ public class SkillTreeScreen extends ScreenTemplate {
         unlock_BW = ButtonWidget.builder(
                 Text.of("Unlock Skill"),
                 button -> {
-                    if (UnlockSkillButton.onClick(selectedElement, mc.player)) mc.setScreen(new SkillTreeScreen());
+                    if (UnlockSkillButton.onClick(selectedElement)) mc.setScreen(new SkillTreeScreen());
                 }
         ).dimensions(bottomX - 100, bottomY - 50, 80, 20).build();
-        unlock_BW.active = QuestsAndSkillsClient.skillPoints > costSP && costSP > 0;
+        unlock_BW.active = QuestsAndSkillsClient.skillPoints >= costSP && costSP > 0;
 
         combat_BW = button(Text.of(""), skillX0, skill1Y, new StSkillScreen(SkillTree.COMBAT_ROOT));
         combat_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_sword.png"), 16, 16);
@@ -272,6 +273,23 @@ public class SkillTreeScreen extends ScreenTemplate {
         addDrawableChild(exploring_falling_BW);
         addDrawableChild(exploring_falling_IW);
 
+
+        setButtonVisibility(SkillTree.COMBAT_ROOT, combat_health_BW, combat_health_IW);
+        setButtonVisibility(SkillTree.COMBAT_HEALTH, combat_regeneration_BW, combat_regeneration_IW);
+        setButtonVisibility(SkillTree.COMBAT_REGENERATION, combat_range_BW, combat_range_IW);
+
+        setButtonVisibility(SkillTree.MINING_ROOT, mining_haste_BW, mining_haste_IW);
+        setButtonVisibility(SkillTree.MINING_HASTE, mining_range_BW, mining_range_IW);
+
+        setButtonVisibility(SkillTree.FORAGING_ROOT, foraging_haste_BW, foraging_haste_IW);
+        setButtonVisibility(SkillTree.FORAGING_HASTE, foraging_range_BW, foraging_range_IW);
+
+        setButtonVisibility(SkillTree.FISHING_ROOT, fishing_luck_BW, fishing_luck_IW);
+        setButtonVisibility(SkillTree.FISHING_LUCK, fishing_speed_BW, fishing_speed_IW);
+        setButtonVisibility(SkillTree.FISHING_SPEED, fishing_conduit_BW, fishing_conduit_IW);
+
+        setButtonVisibility(SkillTree.EXPLORING_ROOT, exploring_speed_BW, exploring_speed_IW);
+        setButtonVisibility(SkillTree.EXPLORING_WALK_SPEED, exploring_falling_BW, exploring_falling_IW);
     }
 
     @Override
@@ -286,8 +304,6 @@ public class SkillTreeScreen extends ScreenTemplate {
             OrderedText orderedText = text.get(m);
             context.drawText(this.textRenderer, orderedText, bottomX - 105, centerY - 70 + m * this.textRenderer.fontHeight, 0xffffff, false);
         }
-
-
     }
 
     @Override
@@ -296,18 +312,28 @@ public class SkillTreeScreen extends ScreenTemplate {
         drawBgST(context);
     }
 
+    private static void setButtonVisibility(@NotNull SkillTreeElement previousElement, ButtonWidget button, IconWidget icon) {
+        var next = previousElement.unlockNextPathElement;
+        var currentLevel = SkillTree.getCurrentLevel(previousElement);
+
+        if (currentLevel >= next) {
+            button.visible = true;
+            icon.visible = true;
+        } else {
+            button.visible = false;
+            icon.visible = false;
+        }
+    }
+
     private static ButtonWidget button(Text text, int x, int y) {
         return ButtonWidget.builder(
-                text, button -> {
-                }
+                text, button -> {}
         ).dimensions(x, y, 20, 20).build();
     }
 
     private static ButtonWidget button(Text text, int x, int y, Screen screen) {
         return ButtonWidget.builder(
-                text, button -> {
-                    mc.setScreen(screen);
-                }
+                text, button -> mc.setScreen(screen)
         ).dimensions(x, y, 20, 20).build();
     }
 }
