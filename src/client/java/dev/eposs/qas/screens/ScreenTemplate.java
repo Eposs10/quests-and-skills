@@ -1,6 +1,7 @@
 package dev.eposs.qas.screens;
 
 import dev.eposs.qas.QuestsAndSkills;
+import dev.eposs.qas.screens.skilltree.SkillTreeScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -19,15 +20,15 @@ public abstract class ScreenTemplate extends Screen {
             Style.EMPTY.withBold(true).withUnderline(true)
     );
 
-    static MinecraftClient mc = MinecraftClient.getInstance();
+    protected static MinecraftClient mc = MinecraftClient.getInstance();
 
-    protected ButtonWidget mainMenu;
-    protected ButtonWidget recipes;
-    protected ButtonWidget skillTree;
-    protected ButtonWidget opt0;
-    protected ButtonWidget opt1;
+    private TextWidget TW_title;
 
-    private TextWidget title;
+    protected ButtonWidget BW_mainMenu;
+    protected ButtonWidget BW_recipes;
+    protected ButtonWidget BW_skillTree;
+    protected ButtonWidget BW_opt0;
+    protected ButtonWidget BW_opt1;
 
     protected int centerX;
     protected int centerY;
@@ -48,42 +49,42 @@ public abstract class ScreenTemplate extends Screen {
         bottomX = centerX + 210;
         bottomY = centerY + 140;
 
-        title = new TextWidget(titleText, this.textRenderer);
-        title.setX(centerX - (title.getWidth()/2));
-        title.setY(centerY - 120);
+        TW_title = new TextWidget(titleText, this.textRenderer);
+        TW_title.setX(centerX - (TW_title.getWidth()/2));
+        TW_title.setY(centerY - 120);
 
-        mainMenu = ButtonWidget.builder(
+        BW_mainMenu = ButtonWidget.builder(
                 Text.of("Main Menu"),
                 button -> mc.setScreen(new MainMenuScreen())
         ).dimensions(centerX - 200, centerY - 80, 60, 20).build();
 
-        recipes = ButtonWidget.builder(
+        BW_recipes = ButtonWidget.builder(
                 Text.of("Recipes"),
                 button -> mc.setScreen(new RecipesScreen())
         ).dimensions(centerX - 200, centerY - 50, 60, 20).build();
 
-        skillTree = ButtonWidget.builder(
+        BW_skillTree = ButtonWidget.builder(
                 Text.of("Skill Tree"),
                 button -> mc.setScreen(new SkillTreeScreen())
         ).dimensions(centerX - 200, centerY - 20, 60, 20).build();
 
-        opt0 = ButtonWidget.builder(
+        BW_opt0 = ButtonWidget.builder(
                 Text.of("Opt0"),
                 button -> {
                 }
         ).dimensions(centerX - 200, centerY + 10, 60, 20).build();
 
-        opt1 = ButtonWidget.builder(
+        BW_opt1 = ButtonWidget.builder(
                 Text.of("Opt1"),
                 button -> {
                 }
         ).dimensions(centerX - 200, centerY + 40, 60, 20).build();
 
-        addDrawableChild(title);
+        addDrawableChild(TW_title);
 
-        addDrawableChild(mainMenu);
-        addDrawableChild(recipes);
-        addDrawableChild(skillTree);
+        addDrawableChild(BW_mainMenu);
+        addDrawableChild(BW_recipes);
+        addDrawableChild(BW_skillTree);
         //addDrawableChild(opt0);
         //addDrawableChild(opt1);
     }
@@ -101,19 +102,19 @@ public abstract class ScreenTemplate extends Screen {
         */
     }
 
-    void drawBg(@NotNull DrawContext context) {
+    protected void drawBg(@NotNull DrawContext context) {
         // 2370x1580 | Title P(235/60) 1900x140
         context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 
-    void drawBgText(@NotNull DrawContext context) {
+    protected void drawBgText(@NotNull DrawContext context) {
         // 2370x1580 | Title P(235/60) 1900x140 | Text P(450|260) 1860x1260
         context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-text.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);
     }
 
-    void drawBgST(@NotNull DrawContext context) {
+    protected void drawBgST(@NotNull DrawContext context) {
         // 2370x1580 | Title P(235/60) 1900x140 | Tree P(450|260) 1240x1260 | Text P(1750/260) 560x
         context.drawTexture(QuestsAndSkills.modPath("textures/screens/screen-stars-bg-st1.png"),
                 topX, topY, 0, 0, 420, 280, 420, 280);

@@ -42,6 +42,8 @@ public class SkillTreeManagement {
     public static final ST_PathElement EXPLORING_FEATHER_FALLING = new ST_PathElement("Feather Falling", 5, 3);
     public static final ST_Element EXPLORING_ROOT = new ST_Element("Exploring", Set.of(EXPLORING_WALK_SPEED, EXPLORING_FEATHER_FALLING));
 
+    public static final ST_Element RESET = new ST_Element("Reset Skill Tree", Set.of());
+
 
     /**
      *

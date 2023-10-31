@@ -8,7 +8,7 @@ public class MainMenuScreen extends ScreenTemplate {
     protected void init() {
         super.init();
 
-        this.mainMenu.active = false;
+        this.BW_mainMenu.active = false;
     }
 
     @Override
