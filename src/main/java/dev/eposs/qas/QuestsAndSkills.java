@@ -1,6 +1,7 @@
 package dev.eposs.qas;
 
 import dev.eposs.qas.blocks.ModBlocks;
+import dev.eposs.qas.commands.ResetPersistentDataCommand;
 import dev.eposs.qas.effects.ModEffects;
 import dev.eposs.qas.items.ModItemGroups;
 import dev.eposs.qas.items.ModItems;
@@ -8,6 +9,7 @@ import dev.eposs.qas.util.Events;
 import dev.eposs.qas.util.MobLootTableModifiers;
 import dev.eposs.qas.world.gen.ModWorldGeneration;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -46,6 +48,8 @@ public class QuestsAndSkills implements ModInitializer {
 		MobLootTableModifiers.modifyLootTables();
 
 		Events.registerEvents();
+
+		CommandRegistrationCallback.EVENT.register(ResetPersistentDataCommand::register);
 	}
 
 

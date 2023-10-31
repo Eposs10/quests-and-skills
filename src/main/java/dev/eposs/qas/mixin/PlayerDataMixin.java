@@ -47,6 +47,29 @@ public class PlayerDataMixin implements IPlayerDataSaver {
         return persistentData;
     }
 
+    @Override
+    public void resetPersistentData() {
+        var nbt = new NbtCompound();
+
+        // Default Config Values
+
+        var skillData = new NbtCompound();
+        skillData.putLong(Skills.COMBAT.getName(), 0);
+        skillData.putLong(Skills.MINING.getName(), 0);
+        skillData.putLong(Skills.FARMING.getName(), 0);
+        skillData.putLong(Skills.FORAGING.getName(), 0);
+        skillData.putLong(Skills.FISHING.getName(), 0);
+        skillData.putLong(Skills.EXPLORING.getName(), 0);
+
+        skillData.putInt(ModSkills.SKILL_POINTS, 0);
+
+        nbt.put(ModSkills.NBT_ROOT, skillData);
+
+        nbt.put(ModSkills.ST_ROOT, new NbtCompound());
+
+        this.persistentData = nbt;
+    }
+
 
     @Inject(method = "writeNbt", at = @At("HEAD"))
     protected void injectWriteMethod(NbtCompound nbt, CallbackInfoReturnable info) {
