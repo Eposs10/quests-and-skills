@@ -3,6 +3,8 @@ package dev.eposs.qas.screens.skilltree;
 import dev.eposs.qas.QuestsAndSkillsClient;
 import dev.eposs.qas.screens.ScreenTemplate;
 import dev.eposs.qas.skilldata.SkillTree;
+import dev.eposs.qas.skilldata.SkillTreeElement;
+import dev.eposs.qas.skilldata.UnlockSkillButton;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -91,6 +93,8 @@ public class SkillTreeScreen extends ScreenTemplate {
     protected int skill5Y;
     protected int skill6Y;
 
+    protected SkillTreeElement selectedElement;
+
 
     @Override
     protected void init() {
@@ -126,9 +130,10 @@ public class SkillTreeScreen extends ScreenTemplate {
         unlock_BW = ButtonWidget.builder(
                 Text.of("Unlock Skill"),
                 button -> {
+                    if (UnlockSkillButton.onClick(selectedElement, mc.player)) mc.setScreen(new SkillTreeScreen());
                 }
         ).dimensions(bottomX - 100, bottomY - 50, 80, 20).build();
-        unlock_BW.active = costSP > 0;
+        unlock_BW.active = QuestsAndSkillsClient.skillPoints > costSP && costSP > 0;
 
         combat_BW = button(Text.of(""), skillX0, skill1Y, new StSkillScreen(SkillTree.COMBAT_ROOT));
         combat_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_sword.png"), 16, 16);
@@ -273,8 +278,6 @@ public class SkillTreeScreen extends ScreenTemplate {
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
 
-        //context.drawText(this.textRenderer, skillTitle, bottomX - 90, centerY - 85, 0xffffff, true);
-
         List<OrderedText> text = this.textRenderer.wrapLines(skillText, 90); // Width = Textbreite
 
         // Idk Minecraft Code der "text" in richtiger Breite rendert
@@ -283,6 +286,8 @@ public class SkillTreeScreen extends ScreenTemplate {
             OrderedText orderedText = text.get(m);
             context.drawText(this.textRenderer, orderedText, bottomX - 105, centerY - 70 + m * this.textRenderer.fontHeight, 0xffffff, false);
         }
+
+
     }
 
     @Override

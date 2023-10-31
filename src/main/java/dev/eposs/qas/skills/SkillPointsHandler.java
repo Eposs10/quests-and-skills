@@ -17,18 +17,18 @@ public class SkillPointsHandler {
         return player.getPersistentData().getCompound(ModSkills.NBT_ROOT).getLong(ModSkills.SKILL_POINTS);
     }
 
-    public static void setSkillPoints(@NotNull PlayerEntity playerEntity, long skillPoints) {
+    public static void setSkillPoints(@NotNull PlayerEntity playerEntity, long skillPoints, boolean sync) {
         var player = (IPlayerDataSaver) playerEntity;
         var data = player.getPersistentData().getCompound(ModSkills.NBT_ROOT);
         data.putLong(ModSkills.SKILL_POINTS, skillPoints);
 
         player.getPersistentData().put(ModSkills.NBT_ROOT, data);
 
-        syncSkillPoints(playerEntity, skillPoints);
+        if (sync) syncSkillPoints(playerEntity, skillPoints);
     }
 
     public static void addSkillPoints(PlayerEntity playerEntity, long skillPoints) {
-        setSkillPoints(playerEntity, skillPoints + getSkillPoints(playerEntity));
+        setSkillPoints(playerEntity, skillPoints + getSkillPoints(playerEntity), true);
     }
 
     // Send a packet to the client
@@ -39,7 +39,7 @@ public class SkillPointsHandler {
         data.writeLong(skillPoints);
 
         ServerPlayerEntity serverPlayerEntity = server.getPlayerManager().getPlayer(playerEntity.getUuid());
-        server.execute(() -> ServerPlayNetworking.send(serverPlayerEntity, QuestsAndSkills.modPath(ModSkills.SKILL_POINTS), data));
+        server.execute(() -> ServerPlayNetworking.send(serverPlayerEntity, QuestsAndSkills.modPath(ModSkills.SKILL_POINTS + "_s2c"), data));
     }
 
     public static void initialSync(@NotNull ServerPlayerEntity playerEntity) {
@@ -51,6 +51,6 @@ public class SkillPointsHandler {
         PacketByteBuf data = PacketByteBufs.create();
         data.writeLong(st_data.getLong(ModSkills.SKILL_POINTS));
 
-        server.execute(() -> ServerPlayNetworking.send(playerEntity, QuestsAndSkills.modPath(ModSkills.SKILL_POINTS), data));
+        server.execute(() -> ServerPlayNetworking.send(playerEntity, QuestsAndSkills.modPath(ModSkills.SKILL_POINTS + "_s2c"), data));
     }
 }

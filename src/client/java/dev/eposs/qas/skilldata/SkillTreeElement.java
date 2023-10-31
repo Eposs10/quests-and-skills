@@ -11,7 +11,7 @@ public class SkillTreeElement {
     public final String name;
     public final int maxLevel;
     public final int unlockNextPathElement;
-    public final int[] unlockCost;
+    public final int[] unlockCost; // unlockCost[0] : von Lvl 0 auf Lvl 1
 
     SkillTreeElement(String name, int maxLevel, int unlockNextPathElement, int[] unlockCost) {
         this.name = name;
