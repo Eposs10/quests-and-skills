@@ -1,6 +1,7 @@
 package dev.eposs.qas.skills;
 
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.skills.skilltree.SkillTreeManagement;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
@@ -55,10 +56,17 @@ public class ModSkills {
         // Exp gain Sound
         playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 0.1f, 2.0f);
         // Level up Sound
-        if ( (newExp / Skill.xpPerLevel) > (currentExp / Skill.xpPerLevel) ) { // only after Level Up
+        var newLevel = (newExp / Skill.xpPerLevel);
+        var oldLevel = (currentExp / Skill.xpPerLevel);
+
+        if ( newLevel > oldLevel ) { // only after Level Up
             playerEntity.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 0.5f, 2.0f);
+
+            // give Player SkillPoints
+            var skillPoints = newLevel - oldLevel;
+            SkillTreeManagement.addSkillPoints(playerEntity, skillPoints);
         }
         // Exp gain display
-        playerEntity.sendMessage(Text.literal("+" + exp + " - " + skill.getName() + " " + newExp / Skill.xpPerLevel + " [ " + newExp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]").formatted(Formatting.AQUA), true);
+        playerEntity.sendMessage(Text.literal("+" + exp + " - " + skill.getName() + " " + newLevel + " [ " + newExp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]").formatted(Formatting.AQUA), true);
     }
 }

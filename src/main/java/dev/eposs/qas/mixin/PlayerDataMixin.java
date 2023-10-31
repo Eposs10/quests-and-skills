@@ -41,6 +41,7 @@ public class PlayerDataMixin implements IPlayerDataSaver {
 
         if (!persistentData.contains(SkillTreeManagement.ST_ROOT)) { // Skill Tree Data
             var st_data = new NbtCompound();
+            st_data.putLong(SkillTreeManagement.SKILL_POINTS, 0);
             st_data.put(SkillTreeManagement.ST_COMBAT, new NbtCompound());
             st_data.put(SkillTreeManagement.ST_MINING, new NbtCompound());
             st_data.put(SkillTreeManagement.ST_FORAGING, new NbtCompound());
