@@ -1,14 +1,13 @@
 package dev.eposs.qas;
 
 import dev.eposs.qas.screens.ScreenTestCommand;
-import dev.eposs.qas.skills.skilltree.SkillTreeManagement;
+import dev.eposs.qas.skills.ModSkills;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
-import net.minecraft.text.Text;
 
 public class QuestsAndSkillsClient implements ClientModInitializer {
-	public static long skillPoints = -1;
+	public static long skillPoints;
 
 	@Override
 	public void onInitializeClient() {
@@ -16,11 +15,11 @@ public class QuestsAndSkillsClient implements ClientModInitializer {
 		CommandRegistrationCallback.EVENT.register(ScreenTestCommand::register);
 
 		// Packet handling (Skill Points)
-		ClientPlayNetworking.registerGlobalReceiver(QuestsAndSkills.modPath(SkillTreeManagement.SKILL_POINTS), (client, handler, buf, responseSender) -> {
-			long serverSkillPoints = buf.readLong();
+		ClientPlayNetworking.registerGlobalReceiver(QuestsAndSkills.modPath(ModSkills.SKILL_POINTS), (client, handler, buf, responseSender) -> {
+			var serverSkillPoints = buf.readLong();
 			client.execute(() -> {
-				client.player.sendMessage(Text.literal("Total Skill Points: " + serverSkillPoints));
 				skillPoints = serverSkillPoints;
+				QuestsAndSkills.LOGGER.info("Skill Points synced.");
 			});
 		});
 	}

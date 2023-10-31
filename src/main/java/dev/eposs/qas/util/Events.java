@@ -1,9 +1,9 @@
 package dev.eposs.qas.util;
 
 import dev.eposs.qas.playerdata.PlayerDataKeeper;
+import dev.eposs.qas.skills.SkillPointsHandler;
 import dev.eposs.qas.skills.handling.BlockMinedHandling;
 import dev.eposs.qas.skills.handling.CombatHandling;
-import dev.eposs.qas.skills.skilltree.SkillTreeManagement;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
@@ -23,7 +23,7 @@ public class Events {
         // Initial Sync (Skill Points)
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             var player = handler.getPlayer();
-            SkillTreeManagement.initialSyncSP(player);
+            SkillPointsHandler.initialSync(player);
         });
     }
 }

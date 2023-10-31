@@ -1,7 +1,6 @@
 package dev.eposs.qas.skills;
 
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
-import dev.eposs.qas.skills.skilltree.SkillTreeManagement;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
@@ -11,7 +10,12 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 
 public class ModSkills {
+    // NBT Keys
     public static final String NBT_ROOT = "skills";
+
+    public static final String SKILL_POINTS = "skill_points";
+
+    public static final String ST_ROOT = "st_root";
 
     /**
      * @return All Skills of playerEntity
@@ -64,7 +68,7 @@ public class ModSkills {
 
             // give Player SkillPoints
             var skillPoints = newLevel - oldLevel;
-            SkillTreeManagement.addSkillPoints(playerEntity, skillPoints);
+            SkillPointsHandler.addSkillPoints(playerEntity, skillPoints);
         }
         // Exp gain display
         playerEntity.sendMessage(Text.literal("+" + exp + " - " + skill.getName() + " " + newLevel + " [ " + newExp % Skill.xpPerLevel  + "/" + Skill.xpPerLevel + " ]").formatted(Formatting.AQUA), true);

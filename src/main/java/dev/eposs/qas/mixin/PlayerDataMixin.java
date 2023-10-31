@@ -4,7 +4,6 @@ import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
 import dev.eposs.qas.skills.ModSkills;
 import dev.eposs.qas.skills.Skills;
-import dev.eposs.qas.skills.skilltree.SkillTreeManagement;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NbtCompound;
 import org.jetbrains.annotations.NotNull;
@@ -36,20 +35,13 @@ public class PlayerDataMixin implements IPlayerDataSaver {
             skillData.putLong(Skills.FISHING.getName(), 0);
             skillData.putLong(Skills.EXPLORING.getName(), 0);
 
+            skillData.putInt(ModSkills.SKILL_POINTS, 0);
+
             this.persistentData.put(ModSkills.NBT_ROOT, skillData);
         }
 
-        if (!persistentData.contains(SkillTreeManagement.ST_ROOT)) { // Skill Tree Data
-            var st_data = new NbtCompound();
-            st_data.putLong(SkillTreeManagement.SKILL_POINTS, 0);
-            st_data.put(SkillTreeManagement.ST_COMBAT, new NbtCompound());
-            st_data.put(SkillTreeManagement.ST_MINING, new NbtCompound());
-            st_data.put(SkillTreeManagement.ST_FORAGING, new NbtCompound());
-            st_data.put(SkillTreeManagement.ST_FARMING, new NbtCompound());
-            st_data.put(SkillTreeManagement.ST_FISHING, new NbtCompound());
-            st_data.put(SkillTreeManagement.ST_EXPLORING, new NbtCompound());
-
-            this.persistentData.put(SkillTreeManagement.ST_ROOT, st_data);
+        if (!persistentData.contains(ModSkills.ST_ROOT)) { // SkillTree Data
+            this.persistentData.put(ModSkills.ST_ROOT, new NbtCompound());
         }
 
         return persistentData;

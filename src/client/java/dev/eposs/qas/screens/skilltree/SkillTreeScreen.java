@@ -2,6 +2,7 @@ package dev.eposs.qas.screens.skilltree;
 
 import dev.eposs.qas.QuestsAndSkillsClient;
 import dev.eposs.qas.screens.ScreenTemplate;
+import dev.eposs.qas.skilldata.SkillTree;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -70,12 +71,12 @@ public class SkillTreeScreen extends ScreenTemplate {
     protected ButtonWidget fishing_conduit_BW;
     protected IconWidget fishing_conduit_IW;
 
-    protected ButtonWidget exploration_BW;
-    protected IconWidget exploration_IW;
-    protected ButtonWidget exploration_speed_BW;
-    protected IconWidget exploration_speed_IW;
-    protected ButtonWidget exploration_falling_BW;
-    protected IconWidget exploration_falling_IW;
+    protected ButtonWidget exploring_BW;
+    protected IconWidget exploring_IW;
+    protected ButtonWidget exploring_speed_BW;
+    protected IconWidget exploring_speed_IW;
+    protected ButtonWidget exploring_falling_BW;
+    protected IconWidget exploring_falling_IW;
 
 
     protected int skillX0;
@@ -129,32 +130,32 @@ public class SkillTreeScreen extends ScreenTemplate {
         ).dimensions(bottomX - 100, bottomY - 50, 80, 20).build();
         unlock_BW.active = costSP > 0;
 
-        combat_BW = button(Text.of("🗡"), skillX0, skill1Y, new StCombat());
+        combat_BW = button(Text.of("🗡"), skillX0, skill1Y, new StSkillScreen(SkillTree.COMBAT_ROOT));
 
-        combat_health_BW = button(Text.of(""), skillX1, skill1Y);
+        combat_health_BW = button(Text.of(""), skillX1, skill1Y, new StSkillScreen(SkillTree.COMBAT_HEALTH));
         combat_health_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/health_boost.png"), 18, 18);
         combat_health_IW.setX(skillX1 + 1);
         combat_health_IW.setY(skill1Y + 1);
 
-        combat_regeneration_BW = button(Text.of(""), skillX2, skill1Y);
+        combat_regeneration_BW = button(Text.of(""), skillX2, skill1Y, new StSkillScreen(SkillTree.COMBAT_REGENERATION));
         combat_regeneration_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/regeneration.png"), 18, 18);
         combat_regeneration_IW.setX(skillX2 + 1);
         combat_regeneration_IW.setY(skill1Y + 1);
 
-        combat_range_BW = button(Text.of(""), skillX3, skill1Y);
+        combat_range_BW = button(Text.of(""), skillX3, skill1Y, new StSkillScreen(SkillTree.COMBAT_ATTACK_RANGE));
         combat_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
         combat_range_IW.setX(skillX3 + 1);
         combat_range_IW.setY(skill1Y + 1);
 
-        mining_BW = button(Text.of("⛏"), skillX0, skill2Y, new StMining());
+        mining_BW = button(Text.of("⛏"), skillX0, skill2Y, new StSkillScreen(SkillTree.MINING_ROOT));
 
-        foraging_BW = button(Text.of("🪓"), skillX0, skill3Y, new StForaging());
+        foraging_BW = button(Text.of("🪓"), skillX0, skill3Y, new StSkillScreen(SkillTree.FORAGING_ROOT));
 
-        farming_BW = button(Text.of("🌾"), skillX0, skill4Y, new StFarming());
+        farming_BW = button(Text.of("🌾"), skillX0, skill4Y, new StSkillScreen(SkillTree.FARMING_ROOT));
 
-        fishing_BW = button(Text.of("🎣"), skillX0, skill5Y, new StFishing());
+        fishing_BW = button(Text.of("🎣"), skillX0, skill5Y, new StSkillScreen(SkillTree.FISHING_ROOT));
 
-        exploration_BW = button(Text.of("👞"), skillX0, skill6Y, new StExploration());
+        exploring_BW = button(Text.of("👞"), skillX0, skill6Y, new StSkillScreen(SkillTree.EXPLORING_ROOT));
 
 
         addDrawableChild(TW_skillTitle);
@@ -179,7 +180,7 @@ public class SkillTreeScreen extends ScreenTemplate {
 
         addDrawableChild(fishing_BW);
 
-        addDrawableChild(exploration_BW);
+        addDrawableChild(exploring_BW);
 
     }
 
