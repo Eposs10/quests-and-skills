@@ -1,4 +1,6 @@
-// 1.20.2	2023-10-26T22:04:22.097855	Vanilla+ Quests and Skills/Tags for minecraft:block
-2ccbf9bd7e037db734d4d8fa07f87a4b6f1de1b6 data/quests-and-skills/tags/blocks/rare_mining_blocks.json
-2acce408d5f6d9ecb73690307e613ee8581cd393 data/quests-and-skills/tags/blocks/basic_mining_blocks.json
+// 1.20.2	2023-11-01T20:30:27.599151	Vanilla+ Quests and Skills/Tags for minecraft:block
+0f985db48b076d7cdd40d2c396be29409cb20b4e data/quests-and-skills/tags/blocks/basic_ore_blocks.json
 21cd59186ed1773d53bb0abf6dfb53a560f6ca9b data/quests-and-skills/tags/blocks/farming_skill.json
+2acce408d5f6d9ecb73690307e613ee8581cd393 data/quests-and-skills/tags/blocks/basic_mining_blocks.json
+58953344f6e7576edd285bcc2379b1e5f7a6d5c1 data/quests-and-skills/tags/blocks/rare_ore_blocks.json
+2ccbf9bd7e037db734d4d8fa07f87a4b6f1de1b6 data/quests-and-skills/tags/blocks/rare_mining_blocks.json

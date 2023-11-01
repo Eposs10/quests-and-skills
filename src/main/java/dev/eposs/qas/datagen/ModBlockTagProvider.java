@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.BlockTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -25,7 +26,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.NETHER_WART)
                 .add(Blocks.TORCHFLOWER)
                 .add(Blocks.PITCHER_PLANT)
-                ;
+        ;
 
         getOrCreateTagBuilder(ModTags.Blocks.MINING_SKILL_BASIC_BLOCKS)
                 .add(Blocks.STONE)
@@ -65,7 +66,7 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.GLOWSTONE)
 
                 .add(Blocks.END_STONE)
-                ;
+        ;
 
         getOrCreateTagBuilder(ModTags.Blocks.MINING_SKILL_RARE_BLOCKS)
                 .add(Blocks.OBSIDIAN)
@@ -76,6 +77,22 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(Blocks.AMETHYST_BLOCK)
                 .add(Blocks.AMETHYST_CLUSTER)
                 .add(Blocks.LARGE_AMETHYST_BUD)
-                ;
+        ;
+
+        getOrCreateTagBuilder(ModTags.Blocks.MINING_SKILL_BASIC_ORES)
+                .forceAddTag(BlockTags.COAL_ORES)
+                .forceAddTag(BlockTags.COPPER_ORES)
+                .forceAddTag(BlockTags.REDSTONE_ORES)
+                .forceAddTag(BlockTags.LAPIS_ORES)
+                .forceAddTag(BlockTags.IRON_ORES)
+                .forceAddTag(BlockTags.GOLD_ORES)
+                .add(Blocks.NETHER_QUARTZ_ORE)
+        ;
+
+        getOrCreateTagBuilder(ModTags.Blocks.MINING_SKILL_RARE_ORES)
+                .forceAddTag(BlockTags.DIAMOND_ORES)
+                .forceAddTag(BlockTags.EMERALD_ORES)
+                .add(Blocks.ANCIENT_DEBRIS)
+        ;
     }
 }

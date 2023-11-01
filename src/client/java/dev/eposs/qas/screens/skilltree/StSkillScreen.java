@@ -6,7 +6,6 @@ import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 public class StSkillScreen extends SkillTreeScreen {
-    private int currentLevel;
 
     StSkillScreen(@NotNull SkillTreeElement element) {
         this.selectedElement = element;
@@ -14,7 +13,7 @@ public class StSkillScreen extends SkillTreeScreen {
         skillTitle = Text.literal(element.name).setStyle(TITLE_STYLE);
         skillText = Text.of("temp"); // ToDo: Add every Text
 
-        currentLevel = SkillTree.getCurrentLevel(element);
+        int currentLevel = SkillTree.getCurrentLevel(element);
 
         if (currentLevel == element.maxLevel) costSP = -1;
         else costSP = element.unlockCost[currentLevel]; // unlockCost[0] : von Lvl 0 auf Lvl 1
