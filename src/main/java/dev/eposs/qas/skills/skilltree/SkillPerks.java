@@ -8,6 +8,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,16 +39,24 @@ public class SkillPerks {
         return tickRelevantStats;
     }
 
+    public static int getFishingSpeed(PlayerEntity playerEntity) {
+        var st_data = SkillTreeDataHandler.getData(playerEntity);
+
+        if (st_data.getInt(QuestsAndSkills.getAsNbtKey(Skills.FISHING.getName())) > 0) {
+            return 1 + st_data.getInt(QuestsAndSkills.getAsNbtKey(Skills.FISHING_SPEED.getName()));
+        }
+        return 0;
+    }
+
     // Should be called on server when SkillTree Data is updated
     public static void applyEffects(PlayerEntity playerEntity) {
         // persistent
         int healthBoost = 0;
-        int regeneration = 0;
         int luck = 0;
+        int regeneration = 0;
         boolean conduit = false;
-        boolean nightVision = false;
         int speed = 0;
-        int fishingSpeed = 0;
+        boolean nightVision = false;
         int fallHeight = 0;
 
         var st_data = SkillTreeDataHandler.getData(playerEntity);
@@ -64,12 +73,8 @@ public class SkillPerks {
                     case "Combat" -> healthBoost++;
                     case "Max Health" -> healthBoost = healthBoost + level;
                     case "Regeneration" -> regeneration = regeneration + level;
-                    case "Fishing" -> {
-                        luck++;
-                        fishingSpeed++;
-                    }
+                    case "Fishing" -> luck++;
                     case "Luck" -> luck = luck + level;
-                    case "Fishing Speed" -> fishingSpeed = fishingSpeed + level;
                     case "Conduit Effect" -> conduit = true;
                     case "Exploring" -> speed++;
                     case "Walk Speed" -> speed = speed + level;
@@ -79,18 +84,19 @@ public class SkillPerks {
             }
         }
 
-        // Set Attributes ToDO: Alle anderen Perks coden
+        // Set Attributes
 
         // Max Health
-        var currentHpAddition = playerEntity.getMaxHealth() - 20;
+        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).clearModifiers();
         playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-                .addPersistentModifier(new EntityAttributeModifier("MaxHealth", (healthBoost * 2) - currentHpAddition, EntityAttributeModifier.Operation.ADDITION));
+                .addPersistentModifier(new EntityAttributeModifier("MaxHealth", (healthBoost * 2), EntityAttributeModifier.Operation.ADDITION));
         playerEntity.heal(playerEntity.getMaxHealth());
 
         // Luck
-        var currentLuck = playerEntity.getAttributeValue(EntityAttributes.GENERIC_LUCK);
+        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK).clearModifiers();
         playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
-                .addPersistentModifier(new EntityAttributeModifier("Luck", luck - currentLuck, EntityAttributeModifier.Operation.ADDITION));
+                .addPersistentModifier(new EntityAttributeModifier("Luck", luck, EntityAttributeModifier.Operation.ADDITION));
+        playerEntity.sendMessage(Text.of("luck:" + playerEntity.getAttributeValue(EntityAttributes.GENERIC_LUCK)));
 
         // Regeneration
         if (regeneration > 0)

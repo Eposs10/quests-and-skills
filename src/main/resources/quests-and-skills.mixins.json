@@ -3,10 +3,11 @@
   "package": "dev.eposs.qas.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BlockPlaceMixin",
     "ExampleMixin",
     "FishingMixin",
-    "PlayerDataMixin",
-    "BlockPlaceMixin"
+    "FishingSpeedMixin",
+    "PlayerDataMixin"
   ],
   "injectors": {
     "defaultRequire": 1
