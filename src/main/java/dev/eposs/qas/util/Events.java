@@ -7,8 +7,10 @@ import dev.eposs.qas.skills.exp.BlockMinedHandling;
 import dev.eposs.qas.skills.exp.CombatHandling;
 import dev.eposs.qas.skills.skilltree.SkillPointsHandler;
 import dev.eposs.qas.skills.skilltree.SkillTreeDataHandler;
+import dev.eposs.qas.skills.skilltree.TickPerks;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -23,6 +25,9 @@ public class Events {
         // Keep Data after Death
         ServerPlayerEvents.COPY_FROM.register(PlayerDataKeeper::keepData);
         ServerPlayerEvents.AFTER_RESPAWN.register(PlayerDataKeeper::keepData);
+
+        // Tick Skill Perks
+        ServerTickEvents.START_WORLD_TICK.register(new TickPerks());
 
         // Initial Sync
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {

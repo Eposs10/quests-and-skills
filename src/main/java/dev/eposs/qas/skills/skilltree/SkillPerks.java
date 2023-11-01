@@ -11,22 +11,42 @@ import net.minecraft.entity.player.PlayerEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SkillPerks {
+
+    // called ever tick (or every second)
+    protected static @NotNull Map<String, Integer> getTickRelevantStats(PlayerEntity playerEntity) {
+        Map<String, Integer> tickRelevantStats = new HashMap<>();
+
+        var st_data = SkillTreeDataHandler.getData(playerEntity);
+
+        for (Skills skill : Skills.getList()) {
+            String name = skill.getName();
+            if (st_data.contains(QuestsAndSkills.getAsNbtKey(name))) {
+                int level = st_data.getInt(QuestsAndSkills.getAsNbtKey(name));
+
+                if (level <= 0) continue;
+
+                if (name.equals("Attack Range") || name.equals("Pickaxe Haste") || name.equals("Pickaxe Reach") || name.equals("Axe Haste") || name.equals("Axe Reach")) {
+                    tickRelevantStats.put(name, level);
+                }
+            }
+        }
+
+        return tickRelevantStats;
+    }
 
     // Should be called on server when SkillTree Data is updated
     public static void applyEffects(PlayerEntity playerEntity) {
+        // persistent
         int healthBoost = 0;
         int regeneration = 0;
         int luck = 0;
         boolean conduit = false;
         boolean nightVision = false;
         int speed = 0;
-
-        int attackRange = 0;
-        int pickaxeHaste = 0;
-        int pickaxeReach = 0;
-        int axeHaste = 0;
-        int axeReach = 0;
         int fishingSpeed = 0;
         int fallHeight = 0;
 
@@ -44,11 +64,6 @@ public class SkillPerks {
                     case "Combat" -> healthBoost++;
                     case "Max Health" -> healthBoost = healthBoost + level;
                     case "Regeneration" -> regeneration = regeneration + level;
-                    case "Attack Range" -> attackRange = attackRange + level;
-                    case "Pickaxe Haste" -> pickaxeHaste = pickaxeHaste + level;
-                    case "Pickaxe Reach" -> pickaxeReach = pickaxeReach + level;
-                    case "Axe Haste" -> axeHaste = axeHaste + level;
-                    case "Axe Reach" -> axeReach = axeReach + level;
                     case "Fishing" -> {
                         luck++;
                         fishingSpeed++;
@@ -73,11 +88,13 @@ public class SkillPerks {
         playerEntity.heal(playerEntity.getMaxHealth());
 
         // Luck
+        var currentLuck = playerEntity.getAttributeValue(EntityAttributes.GENERIC_LUCK);
         playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
-                .addPersistentModifier(new EntityAttributeModifier("Luck", luck, EntityAttributeModifier.Operation.ADDITION));
+                .addPersistentModifier(new EntityAttributeModifier("Luck", luck - currentLuck, EntityAttributeModifier.Operation.ADDITION));
 
         // Regeneration
-        if (regeneration > 0) playerEntity.addStatusEffect(infiniteEffect(StatusEffects.REGENERATION, regeneration - 1));
+        if (regeneration > 0)
+            playerEntity.addStatusEffect(infiniteEffect(StatusEffects.REGENERATION, regeneration - 1));
         else playerEntity.removeStatusEffect(StatusEffects.REGENERATION);
 
         // Conduit
