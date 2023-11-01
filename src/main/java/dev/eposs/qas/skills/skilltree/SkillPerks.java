@@ -64,7 +64,7 @@ public class SkillPerks {
             }
         }
 
-        // Set Attributes
+        // Set Attributes ToDO: Alle anderen Perks coden
 
         // Max Health
         var currentHpAddition = playerEntity.getMaxHealth() - 20;

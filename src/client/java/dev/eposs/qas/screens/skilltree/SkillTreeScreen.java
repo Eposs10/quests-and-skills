@@ -1,5 +1,6 @@
 package dev.eposs.qas.screens.skilltree;
 
+import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.QuestsAndSkillsClient;
 import dev.eposs.qas.screens.ScreenTemplate;
 import dev.eposs.qas.skilldata.SkillTree;
@@ -161,9 +162,9 @@ public class SkillTreeScreen extends ScreenTemplate {
         combat_regeneration_IW.setY(skill1Y + 1);
 
         combat_range_BW = button(Text.of(""), skillX3, skill1Y, new StSkillScreen(SkillTree.COMBAT_ATTACK_RANGE));
-        combat_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
-        combat_range_IW.setX(skillX3 + 1);
-        combat_range_IW.setY(skill1Y + 1);
+        combat_range_IW = IconWidget.create(16, 16, QuestsAndSkills.modPath("textures/screens/icons/combat_range.png"), 16, 16);
+        combat_range_IW.setX(skillX3 + 2);
+        combat_range_IW.setY(skill1Y + 2);
 
         mining_BW = button(Text.of(""), skillX0, skill2Y, new StSkillScreen(SkillTree.MINING_ROOT));
         mining_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_pickaxe.png"), 16, 16);
@@ -176,9 +177,9 @@ public class SkillTreeScreen extends ScreenTemplate {
         mining_haste_IW.setY(skill2Y + 1);
 
         mining_range_BW = button(Text.of(""), skillX2, skill2Y, new StSkillScreen(SkillTree.MINING_REACH));
-        mining_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
-        mining_range_IW.setX(skillX2 + 1);
-        mining_range_IW.setY(skill2Y + 1);
+        mining_range_IW = IconWidget.create(16, 16, QuestsAndSkills.modPath("textures/screens/icons/mining_range.png"), 16, 16);
+        mining_range_IW.setX(skillX2 + 2);
+        mining_range_IW.setY(skill2Y + 2);
 
         foraging_BW = button(Text.of(""), skillX0, skill3Y, new StSkillScreen(SkillTree.FORAGING_ROOT));
         foraging_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_axe.png"), 16, 16);
@@ -191,9 +192,9 @@ public class SkillTreeScreen extends ScreenTemplate {
         foraging_haste_IW.setY(skill3Y + 1);
 
         foraging_range_BW = button(Text.of(""), skillX2, skill3Y, new StSkillScreen(SkillTree.FORAGING_REACH));
-        foraging_range_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/strength.png"), 18, 18);
-        foraging_range_IW.setX(skillX2 + 1);
-        foraging_range_IW.setY(skill3Y + 1);
+        foraging_range_IW = IconWidget.create(16, 16, QuestsAndSkills.modPath("textures/screens/icons/foraging_range.png"), 16, 16);
+        foraging_range_IW.setX(skillX2 + 2);
+        foraging_range_IW.setY(skill3Y + 2);
 
         farming_BW = button(Text.of(""), skillX0, skill4Y, new StSkillScreen(SkillTree.FARMING_ROOT));
         farming_IW = IconWidget.create(16, 16, new Identifier("textures/item/netherite_hoe.png"), 16, 16);
