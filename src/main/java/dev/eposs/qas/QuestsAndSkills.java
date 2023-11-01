@@ -60,4 +60,8 @@ public class QuestsAndSkills implements ModInitializer {
 	public static @NotNull Identifier modPath(String name) {
 		return new Identifier(MOD_ID, name);
 	}
+
+	public static @NotNull String getAsNbtKey(@NotNull String string) {
+		return string.toLowerCase().replaceAll(" ", "_");
+	}
 }

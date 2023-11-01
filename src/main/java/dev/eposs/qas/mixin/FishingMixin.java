@@ -1,6 +1,6 @@
 package dev.eposs.qas.mixin;
 
-import dev.eposs.qas.skills.IFishingDropsList;
+import dev.eposs.qas.skills.exp.IFishingDropsList;
 import dev.eposs.qas.skills.exp.FishingHandling;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FishingBobberEntity;

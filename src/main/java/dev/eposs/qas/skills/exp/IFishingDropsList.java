@@ -1,4 +1,4 @@
-package dev.eposs.qas.skills;
+package dev.eposs.qas.skills.exp;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.item.ItemStack;

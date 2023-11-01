@@ -1,6 +1,7 @@
 package dev.eposs.qas.skills;
 
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.skills.skilltree.SkillPointsHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;

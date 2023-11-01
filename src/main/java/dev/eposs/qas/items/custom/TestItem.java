@@ -1,7 +1,7 @@
 package dev.eposs.qas.items.custom;
 
 import dev.eposs.qas.skills.ModSkills;
-import dev.eposs.qas.skills.SkillTreeDataHandler;
+import dev.eposs.qas.skills.skilltree.SkillTreeDataHandler;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

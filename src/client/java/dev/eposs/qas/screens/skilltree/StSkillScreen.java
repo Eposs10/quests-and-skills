@@ -29,6 +29,8 @@ public class StSkillScreen extends SkillTreeScreen {
         super.init();
 
         this.skillTree_BW.active = true;
+
+        // Names -> Skills enum
         switch (selectedElement.name) {
             case "Combat" -> this.combat_BW.active = false;
             case "Max Health" -> this.combat_health_BW.active = false;
@@ -48,6 +50,7 @@ public class StSkillScreen extends SkillTreeScreen {
             case "Exploring" -> this.exploring_BW.active = false;
             case "Walk Speed" -> this.exploring_speed_BW.active = false;
             case "Feather Falling" -> this.exploring_falling_BW.active = false;
+            case "Night Vision" -> this.exploring_night_vision_BW.active = false;
         }
     }
 }

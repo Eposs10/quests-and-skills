@@ -1,7 +1,8 @@
-package dev.eposs.qas.skills;
+package dev.eposs.qas.skills.skilltree;
 
 import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.skills.ModSkills;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;

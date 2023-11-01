@@ -80,6 +80,8 @@ public class SkillTreeScreen extends ScreenTemplate {
     protected IconWidget exploring_speed_IW;
     protected ButtonWidget exploring_falling_BW;
     protected IconWidget exploring_falling_IW;
+    protected ButtonWidget exploring_night_vision_BW;
+    protected IconWidget exploring_night_vision_IW;
 
 
     protected int skillX0;
@@ -226,6 +228,10 @@ public class SkillTreeScreen extends ScreenTemplate {
         exploring_falling_IW.setX(skillX2 + 1);
         exploring_falling_IW.setY(skill6Y + 1);
 
+        exploring_night_vision_BW = button(Text.of(""), skillX3, skill6Y, new StSkillScreen(SkillTree.EXPLORING_NIGHT_VISION));
+        exploring_night_vision_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/night_vision.png"), 18, 18);
+        exploring_night_vision_IW.setX(skillX3 + 1);
+        exploring_night_vision_IW.setY(skill6Y + 1);
 
         addDrawableChild(TW_skillTitle);
         addDrawableChild(TW_costSP);
@@ -265,6 +271,8 @@ public class SkillTreeScreen extends ScreenTemplate {
         addDrawableChild(fishing_luck_IW);
         addDrawableChild(fishing_speed_BW);
         addDrawableChild(fishing_speed_IW);
+        addDrawableChild(fishing_conduit_BW);
+        addDrawableChild(fishing_conduit_IW);
 
         addDrawableChild(exploring_BW);
         addDrawableChild(exploring_IW);
@@ -272,24 +280,27 @@ public class SkillTreeScreen extends ScreenTemplate {
         addDrawableChild(exploring_speed_IW);
         addDrawableChild(exploring_falling_BW);
         addDrawableChild(exploring_falling_IW);
+        addDrawableChild(exploring_night_vision_BW);
+        addDrawableChild(exploring_night_vision_IW);
 
 
-        setButtonVisibility(SkillTree.COMBAT_ROOT, combat_health_BW, combat_health_IW);
-        setButtonVisibility(SkillTree.COMBAT_HEALTH, combat_regeneration_BW, combat_regeneration_IW);
-        setButtonVisibility(SkillTree.COMBAT_REGENERATION, combat_range_BW, combat_range_IW);
+        setButtonClickable(SkillTree.COMBAT_ROOT, combat_health_BW);
+        setButtonClickable(SkillTree.COMBAT_HEALTH, combat_regeneration_BW);
+        setButtonClickable(SkillTree.COMBAT_REGENERATION, combat_range_BW);
 
-        setButtonVisibility(SkillTree.MINING_ROOT, mining_haste_BW, mining_haste_IW);
-        setButtonVisibility(SkillTree.MINING_HASTE, mining_range_BW, mining_range_IW);
+        setButtonClickable(SkillTree.MINING_ROOT, mining_haste_BW);
+        setButtonClickable(SkillTree.MINING_HASTE, mining_range_BW);
 
-        setButtonVisibility(SkillTree.FORAGING_ROOT, foraging_haste_BW, foraging_haste_IW);
-        setButtonVisibility(SkillTree.FORAGING_HASTE, foraging_range_BW, foraging_range_IW);
+        setButtonClickable(SkillTree.FORAGING_ROOT, foraging_haste_BW);
+        setButtonClickable(SkillTree.FORAGING_HASTE, foraging_range_BW);
 
-        setButtonVisibility(SkillTree.FISHING_ROOT, fishing_luck_BW, fishing_luck_IW);
-        setButtonVisibility(SkillTree.FISHING_LUCK, fishing_speed_BW, fishing_speed_IW);
-        setButtonVisibility(SkillTree.FISHING_SPEED, fishing_conduit_BW, fishing_conduit_IW);
+        setButtonClickable(SkillTree.FISHING_ROOT, fishing_luck_BW);
+        setButtonClickable(SkillTree.FISHING_LUCK, fishing_speed_BW);
+        setButtonClickable(SkillTree.FISHING_SPEED, fishing_conduit_BW);
 
-        setButtonVisibility(SkillTree.EXPLORING_ROOT, exploring_speed_BW, exploring_speed_IW);
-        setButtonVisibility(SkillTree.EXPLORING_WALK_SPEED, exploring_falling_BW, exploring_falling_IW);
+        setButtonClickable(SkillTree.EXPLORING_ROOT, exploring_speed_BW);
+        setButtonClickable(SkillTree.EXPLORING_WALK_SPEED, exploring_falling_BW);
+        setButtonClickable(SkillTree.EXPLORING_FEATHER_FALLING, exploring_night_vision_BW);
     }
 
     @Override
@@ -312,17 +323,12 @@ public class SkillTreeScreen extends ScreenTemplate {
         drawBgST(context);
     }
 
-    private static void setButtonVisibility(@NotNull SkillTreeElement previousElement, ButtonWidget button, IconWidget icon) {
+    private static void setButtonClickable(@NotNull SkillTreeElement previousElement, @NotNull ButtonWidget button) {
         var next = previousElement.unlockNextPathElement;
         var currentLevel = SkillTree.getCurrentLevel(previousElement);
 
-        if (currentLevel >= next) {
-            button.visible = true;
-            icon.visible = true;
-        } else {
-            button.visible = false;
-            icon.visible = false;
-        }
+        button.visible = true;
+        button.active = currentLevel >= next; // Nur klickbar wenn req erfüllt
     }
 
     private static ButtonWidget button(Text text, int x, int y) {

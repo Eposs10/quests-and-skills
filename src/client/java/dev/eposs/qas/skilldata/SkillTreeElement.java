@@ -1,5 +1,7 @@
 package dev.eposs.qas.skilldata;
 
+import dev.eposs.qas.QuestsAndSkills;
+
 public class SkillTreeElement {
     public static int[] rootCost = new int[]{5};
     public static int[] unlockCost19 = new int[]{1,1,1,1,1,2,2,2,2,3,3,3,4,5,6,7,8,9,10};
@@ -21,6 +23,6 @@ public class SkillTreeElement {
     }
 
     String getNameAsNbtKey() {
-        return name.toLowerCase().replaceAll(" ", "_");
+        return QuestsAndSkills.getAsNbtKey(this.name);
     }
 }

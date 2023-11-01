@@ -1,7 +1,8 @@
-package dev.eposs.qas.skills;
+package dev.eposs.qas.skills.skilltree;
 
 import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.playerdata.IPlayerDataSaver;
+import dev.eposs.qas.skills.ModSkills;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,6 +16,8 @@ public class SkillTreeDataHandler {
     public static void setData(PlayerEntity player, NbtCompound skillTreeData) {
         var playerData = (IPlayerDataSaver) player;
         playerData.getPersistentData().put(ModSkills.ST_ROOT, skillTreeData);
+
+        SkillPerks.applyEffects(player);
     }
 
     public static NbtCompound getData(PlayerEntity player) {
@@ -32,5 +35,7 @@ public class SkillTreeDataHandler {
         data.writeNbt(st_data);
 
         server.execute(() -> ServerPlayNetworking.send(playerEntity, QuestsAndSkills.modPath(ModSkills.ST_ROOT + "_s2c"), data));
+
+        SkillPerks.applyEffects(playerEntity);
     }
 }
