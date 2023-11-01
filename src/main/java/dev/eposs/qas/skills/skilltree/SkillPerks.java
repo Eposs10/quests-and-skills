@@ -8,8 +8,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,8 +40,7 @@ public class SkillPerks {
                 if (level <= 0) continue;
 
                 switch (name) {
-                    case "Mining", "Farming", "Foraging" ->
-                            playerEntity.giveItemStack(new ItemStack(Items.DIAMOND, 5 * level));
+                    //case "Mining", "Farming", "Foraging" -> playerEntity.giveItemStack(new ItemStack(Items.DIAMOND, 5)); // ToDo: 1 time reward method
                     case "Combat" -> healthBoost++;
                     case "Max Health" -> healthBoost = healthBoost + level;
                     case "Regeneration" -> regeneration = regeneration + level;

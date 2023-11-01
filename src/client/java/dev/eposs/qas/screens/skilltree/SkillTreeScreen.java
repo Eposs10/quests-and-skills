@@ -121,6 +121,13 @@ public class SkillTreeScreen extends ScreenTemplate {
         TW_skillTitle.setX(bottomX - 60 - (TW_skillTitle.getWidth() / 2));
         TW_skillTitle.setY(centerY - 85);
 
+        TextWidget TW_level = null;
+        if (selectedElement != null) {
+            TW_level = new TextWidget(Text.literal("Level: " + SkillTree.getCurrentLevel(selectedElement) + " / " + selectedElement.maxLevel).setStyle(Style.EMPTY.withColor(Formatting.GOLD)), this.textRenderer);
+            TW_level.setX(bottomX - 60 - (TW_level.getWidth() / 2));
+            TW_level.setY(bottomY - 90);
+        }
+
         TextWidget TW_costSP = new TextWidget(Text.literal("Cost: " + costSP + " SP").setStyle(Style.EMPTY.withColor(Formatting.RED)), this.textRenderer);
         TW_costSP.setX(bottomX - 60 - (TW_costSP.getWidth() / 2));
         TW_costSP.setY(bottomY - 80);
@@ -234,6 +241,7 @@ public class SkillTreeScreen extends ScreenTemplate {
         exploring_night_vision_IW.setY(skill6Y + 1);
 
         addDrawableChild(TW_skillTitle);
+        if (TW_level != null) addDrawableChild(TW_level);
         addDrawableChild(TW_costSP);
         addDrawableChild(TW_currentSP);
 
