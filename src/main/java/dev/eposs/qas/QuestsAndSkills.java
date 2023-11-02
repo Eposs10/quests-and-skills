@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 
 // https://github.com/Eposs10/quests-and-skills
 
+// ToDO: Keybinding für ModScreen
+
 public class QuestsAndSkills implements ModInitializer {
 	// Mod ID
 	public static final String MOD_ID = "quests-and-skills";
