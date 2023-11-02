@@ -8,7 +8,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,7 +99,6 @@ public class SkillPerks {
         playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK).clearModifiers();
         playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
                 .addPersistentModifier(new EntityAttributeModifier("Luck", luck, EntityAttributeModifier.Operation.ADDITION));
-        playerEntity.sendMessage(Text.of("luck:" + playerEntity.getAttributeValue(EntityAttributes.GENERIC_LUCK)));
 
         // Regeneration
         if (regeneration > 0)

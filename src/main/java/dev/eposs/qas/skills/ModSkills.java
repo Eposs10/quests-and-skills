@@ -16,6 +16,8 @@ public class ModSkills {
 
     public static final String SKILL_POINTS = "skill_points";
 
+    public static final String VISITED_CHUNKS = "chunks";
+
     public static final String ST_ROOT = "st_root";
 
     /**
