@@ -19,7 +19,7 @@ public abstract class FishingSpeedMixin {
     @Shadow private int waitCountdown;
 
     @Inject(method = "tickFishingLogic", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/projectile/FishingBobberEntity;waitCountdown:I", ordinal = 2))
-    public void modifyCooldown(BlockPos pos, CallbackInfo ci) {
+    private void modifyCooldown(BlockPos pos, CallbackInfo ci) {
         if (this.getPlayerOwner() == null) return;
         int speed = SkillPerks.getFishingSpeed(this.getPlayerOwner());
         this.waitCountdown = this.waitCountdown - speed;

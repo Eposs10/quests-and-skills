@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BlockItem.class)
-public class BlockPlaceMixin {
+public abstract class BlockPlaceMixin {
 
     @Inject(method = "place(Lnet/minecraft/item/ItemPlacementContext;)Lnet/minecraft/util/ActionResult;", at = @At("TAIL"))
     private void addPlacedBlockToList(@NotNull ItemPlacementContext context, CallbackInfoReturnable<ActionResult> cir) {

@@ -48,6 +48,12 @@ public class SkillPerks {
         return 0;
     }
 
+    public static int getFallHeight(PlayerEntity playerEntity) {
+        var st_data = SkillTreeDataHandler.getData(playerEntity);
+
+        return st_data.getInt(QuestsAndSkills.getAsNbtKey(Skills.EXPLORING_FEATHER_FALLING.getName()));
+    }
+
     // Should be called on server when SkillTree Data is updated
     public static void applyEffects(PlayerEntity playerEntity) {
         // persistent
@@ -57,7 +63,6 @@ public class SkillPerks {
         boolean conduit = false;
         int speed = 0;
         boolean nightVision = false;
-        int fallHeight = 0;
 
         var st_data = SkillTreeDataHandler.getData(playerEntity);
 
@@ -78,7 +83,6 @@ public class SkillPerks {
                     case "Conduit Effect" -> conduit = true;
                     case "Exploring" -> speed++;
                     case "Walk Speed" -> speed = speed + level;
-                    case "Feather Falling" -> fallHeight = fallHeight + level;
                     case "Night Vision" -> nightVision = true;
                 }
             }
