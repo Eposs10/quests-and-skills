@@ -52,10 +52,10 @@ public abstract class PlayerDataMixin implements IPlayerDataSaver {
             this.persistentData.put(ModSkills.ST_ROOT, new NbtCompound());
         }
 
-        if (!persistentData.contains("resetQaS") || persistentData.getBoolean("resetQaS")) {
+        /*if (!persistentData.contains("resetQaS") || persistentData.getBoolean("resetQaS")) {
             resetPersistentData();
             persistentData.putBoolean("resetQaS", false);
-        }
+        }*/
 
         return persistentData;
     }
