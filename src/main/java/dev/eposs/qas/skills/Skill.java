@@ -27,11 +27,23 @@ public class Skill {
         return skillExp;
     }
 
-    /**
-     * 1000 Exp = 1 Level
-     * @return skillExp / 1000
-     */
     public long getLevel() {
-        return skillExp / xpPerLevel;
+        return getLevelForTotalExp(skillExp);
+    }
+
+    /**
+     * x : exp
+     * @return lvl = sqrt(exp) / 10
+     */
+    public static long getLevelForTotalExp(long exp) {
+        return (long) (Math.sqrt(exp) / 10);
+    }
+
+    /**
+     * x : lvl
+     * @return exp = 100 * x^2
+     */
+    public static long getExpForLevel(long level) {
+        return (long) (100 * Math.pow(level, 2));
     }
 }
