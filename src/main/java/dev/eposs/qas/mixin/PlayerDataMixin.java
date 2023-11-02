@@ -37,6 +37,9 @@ public class PlayerDataMixin implements IPlayerDataSaver {
 
             skillData.putInt(ModSkills.SKILL_POINTS, 0);
 
+            skillData.putInt(ModSkills.VISITED_CHUNKS_INDEX, 0);
+            skillData.put(ModSkills.VISITED_CHUNKS, new NbtCompound());
+
             this.persistentData.put(ModSkills.NBT_ROOT, skillData);
         }
 
@@ -62,6 +65,9 @@ public class PlayerDataMixin implements IPlayerDataSaver {
         skillData.putLong(Skills.EXPLORING.getName(), 0);
 
         skillData.putInt(ModSkills.SKILL_POINTS, 0);
+
+        skillData.putInt(ModSkills.VISITED_CHUNKS_INDEX, 0);
+        skillData.put(ModSkills.VISITED_CHUNKS, new NbtCompound());
 
         nbt.put(ModSkills.NBT_ROOT, skillData);
 

@@ -1,6 +1,7 @@
 package dev.eposs.qas.skills.skilltree;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import dev.eposs.qas.skills.exp.ExploringHandling;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -10,7 +11,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import org.jetbrains.annotations.NotNull;
 
-public class TickPerks implements ServerTickEvents.StartWorldTick {
+public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
     private int tick;
 
     @Override
@@ -19,9 +20,14 @@ public class TickPerks implements ServerTickEvents.StartWorldTick {
         tick++;
 
         // 1-mal pro sekunde
-        var tickCondition = tick % 20;
-        if (tickCondition == 0) {
+        var secCondition = tick % 20;
+        if (secCondition == 0) {
             applyPerks(world);
+
+            // Exploring Skill : save visited chunks
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                ExploringHandling.saveChunkPos(player);
+            }
         }
     }
 
@@ -97,4 +103,5 @@ public class TickPerks implements ServerTickEvents.StartWorldTick {
             if (removeAttRange) player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).clearModifiers();
         }
     }
+
 }
