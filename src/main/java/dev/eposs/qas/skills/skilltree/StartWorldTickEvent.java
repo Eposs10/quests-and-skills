@@ -19,15 +19,15 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
         if (tick >= 1000) tick = 0;
         tick++;
 
+        // Exploring Skill : save visited chunks
+        for (ServerPlayerEntity player : world.getPlayers()) {
+            ExploringHandling.saveChunkPos(player);
+        }
+
         // 1-mal pro sekunde
         var secCondition = tick % 20;
         if (secCondition == 0) {
             applyPerks(world);
-
-            // Exploring Skill : save visited chunks
-            for (ServerPlayerEntity player : world.getPlayers()) {
-                ExploringHandling.saveChunkPos(player);
-            }
         }
     }
 

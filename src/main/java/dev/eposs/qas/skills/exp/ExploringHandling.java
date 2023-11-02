@@ -5,7 +5,6 @@ import dev.eposs.qas.skills.ModSkills;
 import dev.eposs.qas.skills.Skills;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.ChunkPos;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,8 +33,6 @@ public class ExploringHandling {
         player.getPersistentData().put(ModSkills.NBT_ROOT, skillData);
 
         ModSkills.addSkillExp(25, playerEntity, Skills.EXPLORING);
-
-        playerEntity.sendMessage(Text.of(chunk.asString() + " - " + chunkData.asString() + " - " + skillData.asString()));
     }
 
     private static @NotNull NbtCompound chunkNbt(@NotNull ChunkPos pos) {
