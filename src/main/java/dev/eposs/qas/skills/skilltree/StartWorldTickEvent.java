@@ -33,6 +33,8 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
 
     private static void applyPerks(@NotNull ServerWorld world) {
         for (ServerPlayerEntity player : world.getPlayers()) {
+            SkillPerks.applyEffects(player);
+
             var perks = SkillPerks.getTickRelevantStats(player);
             var mainHand = player.getMainHandStack();
 

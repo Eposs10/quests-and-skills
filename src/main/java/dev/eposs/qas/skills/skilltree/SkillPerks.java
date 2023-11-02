@@ -53,7 +53,7 @@ public class SkillPerks {
         return st_data.getInt(QuestsAndSkills.getAsNbtKey(Skills.EXPLORING_FEATHER_FALLING.getName()));
     }
 
-    // Should be called on server when SkillTree Data is updated
+    // called every second .-.
     public static void applyEffects(PlayerEntity playerEntity) {
         // persistent
         int healthBoost = 0;
