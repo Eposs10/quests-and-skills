@@ -105,26 +105,26 @@ public class SkillPerks {
 
         // Regeneration
         if (regeneration > 0)
-            player.addStatusEffect(infiniteEffect(StatusEffects.REGENERATION, regeneration - 1));
-        else player.removeStatusEffect(StatusEffects.REGENERATION);
+            player.addStatusEffect(statusEffect(StatusEffects.REGENERATION, regeneration - 1));
+        //else player.removeStatusEffect(StatusEffects.REGENERATION);
 
         // Conduit
-        if (conduit) player.addStatusEffect(infiniteEffect(StatusEffects.CONDUIT_POWER, 0));
-        else player.removeStatusEffect(StatusEffects.CONDUIT_POWER);
+        if (conduit) player.addStatusEffect(statusEffect(StatusEffects.CONDUIT_POWER, 0));
+        //else player.removeStatusEffect(StatusEffects.CONDUIT_POWER);
 
         // Speed
-        if (speed > 0) player.addStatusEffect(infiniteEffect(StatusEffects.SPEED, speed - 1));
-        else player.removeStatusEffect(StatusEffects.SPEED);
+        if (speed > 0) player.addStatusEffect(statusEffect(StatusEffects.SPEED, speed - 1));
+        //else player.removeStatusEffect(StatusEffects.SPEED);
 
         // Night Vision
-        if (nightVision) player.addStatusEffect(infiniteEffect(StatusEffects.NIGHT_VISION, 0));
-        else player.removeStatusEffect(StatusEffects.NIGHT_VISION);
+        if (nightVision) player.addStatusEffect(statusEffect(StatusEffects.NIGHT_VISION, 0));
+        //else player.removeStatusEffect(StatusEffects.NIGHT_VISION);
     }
 
 
     @Contract("_, _ -> new")
-    private static @NotNull StatusEffectInstance infiniteEffect(StatusEffect effect, int amplifier) {
-        return new StatusEffectInstance(effect, StatusEffectInstance.INFINITE, amplifier, false, false, true);
+    private static @NotNull StatusEffectInstance statusEffect(StatusEffect effect, int amplifier) {
+        return new StatusEffectInstance(effect, 20*16, amplifier, false, false, true);
     }
 
     public static boolean playerHasSpecificAttributeModifier(@NotNull PlayerEntity player, EntityAttribute attribute, String name) {
