@@ -26,7 +26,7 @@ public class ModSkills {
      */
     public static NbtCompound getSkills(PlayerEntity playerEntity) {
         var player = (IPlayerDataSaver) playerEntity;
-        return player.getPersistentData().getCompound(NBT_ROOT);
+        return player.getPersistentDataQaS().getCompound(NBT_ROOT);
     }
 
     /**
@@ -44,9 +44,9 @@ public class ModSkills {
     public static void setSkillExp(long exp, PlayerEntity playerEntity, @NotNull Skills skill) {
         var player = (IPlayerDataSaver) playerEntity;
 
-        var skillData = player.getPersistentData().getCompound(NBT_ROOT);
+        var skillData = player.getPersistentDataQaS().getCompound(NBT_ROOT);
         skillData.putLong(skill.getName(), exp);
-        player.getPersistentData().put(NBT_ROOT, skillData);
+        player.getPersistentDataQaS().put(NBT_ROOT, skillData);
     }
 
     /**

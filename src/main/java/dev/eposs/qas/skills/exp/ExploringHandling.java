@@ -15,7 +15,7 @@ public class ExploringHandling {
         ChunkPos pos = playerEntity.getChunkPos();
 
         var player = (IPlayerDataSaver) playerEntity;
-        var skillData = player.getPersistentData().getCompound(ModSkills.NBT_ROOT);
+        var skillData = player.getPersistentDataQaS().getCompound(ModSkills.NBT_ROOT);
 
         var index = skillData.getInt(ModSkills.VISITED_CHUNKS_INDEX);
         var chunkData = skillData.getCompound(ModSkills.VISITED_CHUNKS);
@@ -30,7 +30,7 @@ public class ExploringHandling {
         skillData.put(ModSkills.VISITED_CHUNKS, chunkData);
         skillData.putInt(ModSkills.VISITED_CHUNKS_INDEX, index + 1);
 
-        player.getPersistentData().put(ModSkills.NBT_ROOT, skillData);
+        player.getPersistentDataQaS().put(ModSkills.NBT_ROOT, skillData);
 
         ModSkills.addSkillExp(25, playerEntity, Skills.EXPLORING);
     }

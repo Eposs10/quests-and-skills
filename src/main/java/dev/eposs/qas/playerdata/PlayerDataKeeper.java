@@ -7,6 +7,6 @@ public class PlayerDataKeeper {
         var oldPlayerData = (IPlayerDataSaver) oldPlayer;
         var newPlayerData = (IPlayerDataSaver) newPlayer;
 
-        newPlayerData.getPersistentData().copyFrom(oldPlayerData.getPersistentData());
+        newPlayerData.getPersistentDataQaS().copyFrom(oldPlayerData.getPersistentDataQaS());
     }
 }

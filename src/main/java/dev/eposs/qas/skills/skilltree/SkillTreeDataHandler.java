@@ -15,19 +15,19 @@ import org.jetbrains.annotations.NotNull;
 public class SkillTreeDataHandler {
     public static void setData(PlayerEntity player, NbtCompound skillTreeData) {
         var playerData = (IPlayerDataSaver) player;
-        playerData.getPersistentData().put(ModSkills.ST_ROOT, skillTreeData);
+        playerData.getPersistentDataQaS().put(ModSkills.ST_ROOT, skillTreeData);
     }
 
     public static NbtCompound getData(PlayerEntity player) {
         var playerData = (IPlayerDataSaver) player;
-        return playerData.getPersistentData().getCompound(ModSkills.ST_ROOT);
+        return playerData.getPersistentDataQaS().getCompound(ModSkills.ST_ROOT);
     }
 
     public static void initialSync(@NotNull ServerPlayerEntity playerEntity) {
         MinecraftServer server = playerEntity.getServer();
 
         var player = (IPlayerDataSaver) playerEntity;
-        var st_data = player.getPersistentData().getCompound(ModSkills.ST_ROOT);
+        var st_data = player.getPersistentDataQaS().getCompound(ModSkills.ST_ROOT);
 
         PacketByteBuf data = PacketByteBufs.create();
         data.writeNbt(st_data);

@@ -20,7 +20,7 @@ public class ResetPersistentDataCommand {
 
                     // Reset Data
                     var playerData = (IPlayerDataSaver) player;
-                    playerData.resetPersistentData();
+                    playerData.resetPersistentDataQaS();
 
                     player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).clearModifiers();
                     player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).clearModifiers();

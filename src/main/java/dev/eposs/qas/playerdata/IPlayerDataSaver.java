@@ -3,6 +3,6 @@ package dev.eposs.qas.playerdata;
 import net.minecraft.nbt.NbtCompound;
 
 public interface IPlayerDataSaver {
-    NbtCompound getPersistentData();
-    void resetPersistentData();
+    NbtCompound getPersistentDataQaS();
+    void resetPersistentDataQaS();
 }

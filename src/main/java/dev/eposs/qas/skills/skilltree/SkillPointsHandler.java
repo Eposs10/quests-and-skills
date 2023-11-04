@@ -15,15 +15,15 @@ public class SkillPointsHandler {
 
     public static long getSkillPoints(PlayerEntity playerEntity) {
         var player = (IPlayerDataSaver) playerEntity;
-        return player.getPersistentData().getCompound(ModSkills.NBT_ROOT).getLong(ModSkills.SKILL_POINTS);
+        return player.getPersistentDataQaS().getCompound(ModSkills.NBT_ROOT).getLong(ModSkills.SKILL_POINTS);
     }
 
     public static void setSkillPoints(@NotNull PlayerEntity playerEntity, long skillPoints, boolean sync) {
         var player = (IPlayerDataSaver) playerEntity;
-        var data = player.getPersistentData().getCompound(ModSkills.NBT_ROOT);
+        var data = player.getPersistentDataQaS().getCompound(ModSkills.NBT_ROOT);
         data.putLong(ModSkills.SKILL_POINTS, skillPoints);
 
-        player.getPersistentData().put(ModSkills.NBT_ROOT, data);
+        player.getPersistentDataQaS().put(ModSkills.NBT_ROOT, data);
 
         if (sync) syncSkillPoints(playerEntity, skillPoints);
     }
@@ -47,7 +47,7 @@ public class SkillPointsHandler {
         MinecraftServer server = playerEntity.getServer();
 
         var player = (IPlayerDataSaver) playerEntity;
-        var st_data = player.getPersistentData().getCompound(ModSkills.NBT_ROOT);
+        var st_data = player.getPersistentDataQaS().getCompound(ModSkills.NBT_ROOT);
 
         PacketByteBuf data = PacketByteBufs.create();
         data.writeLong(st_data.getLong(ModSkills.SKILL_POINTS));
