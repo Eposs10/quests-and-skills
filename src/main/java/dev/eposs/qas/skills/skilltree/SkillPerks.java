@@ -91,16 +91,18 @@ public class SkillPerks {
         // Set Attributes
 
         // Max Health
-        if (!playerHasSpecificAttributeModifier(player, EntityAttributes.GENERIC_MAX_HEALTH, "MaxHealth")) {
+        if (!playerHasSpecificAttributeModifierWithLevel(player, EntityAttributes.GENERIC_MAX_HEALTH, "MaxHealthQaS", (healthBoost * 2))) {
+            player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).clearModifiers();
             player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-                    .addPersistentModifier(new EntityAttributeModifier(player.getUuid(), "MaxHealth", (healthBoost * 2), EntityAttributeModifier.Operation.ADDITION));
+                    .addPersistentModifier(new EntityAttributeModifier( "MaxHealthQaS", (healthBoost * 2), EntityAttributeModifier.Operation.ADDITION));
             player.heal(player.getMaxHealth());
         }
 
         // Luck
-        if (!playerHasSpecificAttributeModifier(player, EntityAttributes.GENERIC_LUCK, "Luck")) {
+        if (!playerHasSpecificAttributeModifierWithLevel(player, EntityAttributes.GENERIC_LUCK, "LuckQaS", luck)) {
+            player.getAttributeInstance(EntityAttributes.GENERIC_LUCK).clearModifiers();
             player.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
-                    .addPersistentModifier(new EntityAttributeModifier(player.getUuid(), "Luck", luck, EntityAttributeModifier.Operation.ADDITION));
+                    .addPersistentModifier(new EntityAttributeModifier( "LuckQaS", luck, EntityAttributeModifier.Operation.ADDITION));
         }
 
         // Regeneration
@@ -127,9 +129,9 @@ public class SkillPerks {
         return new StatusEffectInstance(effect, 20*16, amplifier, false, false, true);
     }
 
-    public static boolean playerHasSpecificAttributeModifier(@NotNull PlayerEntity player, EntityAttribute attribute, String name) {
+    public static boolean playerHasSpecificAttributeModifierWithLevel(@NotNull PlayerEntity player, EntityAttribute attribute, String name, double level) {
         for (EntityAttributeModifier entityAttributeModifier : player.getAttributeInstance(attribute).getModifiers(EntityAttributeModifier.Operation.ADDITION)) {
-            if (entityAttributeModifier.getName().equals(name)) {
+            if (entityAttributeModifier.getName().equals(name) && entityAttributeModifier.getValue() == level) {
                 return true;
             }
         }
