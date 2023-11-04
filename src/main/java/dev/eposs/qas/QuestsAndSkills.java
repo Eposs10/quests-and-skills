@@ -2,6 +2,7 @@ package dev.eposs.qas;
 
 import dev.eposs.qas.blocks.ModBlocks;
 import dev.eposs.qas.commands.ResetPersistentDataCommand;
+import dev.eposs.qas.commands.SetSkillPointsCommand;
 import dev.eposs.qas.effects.ModEffects;
 import dev.eposs.qas.items.ModItemGroups;
 import dev.eposs.qas.items.ModItems;
@@ -50,6 +51,7 @@ public class QuestsAndSkills implements ModInitializer {
 		Events.registerEvents();
 
 		CommandRegistrationCallback.EVENT.register(ResetPersistentDataCommand::register);
+		CommandRegistrationCallback.EVENT.register(SetSkillPointsCommand::register);
 	}
 
 

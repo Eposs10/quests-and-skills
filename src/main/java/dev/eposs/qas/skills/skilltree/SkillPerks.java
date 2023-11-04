@@ -2,6 +2,7 @@ package dev.eposs.qas.skills.skilltree;
 
 import dev.eposs.qas.QuestsAndSkills;
 import dev.eposs.qas.skills.Skills;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;
@@ -54,7 +55,7 @@ public class SkillPerks {
     }
 
     // called every second .-.
-    public static void applyEffects(PlayerEntity playerEntity) {
+    public static void applyEffects(PlayerEntity player) {
         // persistent
         int healthBoost = 0;
         int luck = 0;
@@ -63,7 +64,7 @@ public class SkillPerks {
         int speed = 0;
         boolean nightVision = false;
 
-        var st_data = SkillTreeDataHandler.getData(playerEntity);
+        var st_data = SkillTreeDataHandler.getData(player);
 
         for (Skills skill : Skills.getList()) {
             String name = skill.getName();
@@ -90,37 +91,48 @@ public class SkillPerks {
         // Set Attributes
 
         // Max Health
-        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).clearModifiers();
-        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
-                .addPersistentModifier(new EntityAttributeModifier("MaxHealth", (healthBoost * 2), EntityAttributeModifier.Operation.ADDITION));
-        playerEntity.heal(playerEntity.getMaxHealth());
+        if (!playerHasSpecificAttributeModifier(player, EntityAttributes.GENERIC_MAX_HEALTH, "MaxHealth")) {
+            player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH)
+                    .addPersistentModifier(new EntityAttributeModifier(player.getUuid(), "MaxHealth", (healthBoost * 2), EntityAttributeModifier.Operation.ADDITION));
+            player.heal(player.getMaxHealth());
+        }
 
         // Luck
-        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK).clearModifiers();
-        playerEntity.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
-                .addPersistentModifier(new EntityAttributeModifier("Luck", luck, EntityAttributeModifier.Operation.ADDITION));
+        if (!playerHasSpecificAttributeModifier(player, EntityAttributes.GENERIC_LUCK, "Luck")) {
+            player.getAttributeInstance(EntityAttributes.GENERIC_LUCK)
+                    .addPersistentModifier(new EntityAttributeModifier(player.getUuid(), "Luck", luck, EntityAttributeModifier.Operation.ADDITION));
+        }
 
         // Regeneration
         if (regeneration > 0)
-            playerEntity.addStatusEffect(infiniteEffect(StatusEffects.REGENERATION, regeneration - 1));
-        else playerEntity.removeStatusEffect(StatusEffects.REGENERATION);
+            player.addStatusEffect(infiniteEffect(StatusEffects.REGENERATION, regeneration - 1));
+        else player.removeStatusEffect(StatusEffects.REGENERATION);
 
         // Conduit
-        if (conduit) playerEntity.addStatusEffect(infiniteEffect(StatusEffects.CONDUIT_POWER, 0));
-        else playerEntity.removeStatusEffect(StatusEffects.CONDUIT_POWER);
+        if (conduit) player.addStatusEffect(infiniteEffect(StatusEffects.CONDUIT_POWER, 0));
+        else player.removeStatusEffect(StatusEffects.CONDUIT_POWER);
 
         // Speed
-        if (speed > 0) playerEntity.addStatusEffect(infiniteEffect(StatusEffects.SPEED, speed - 1));
-        else playerEntity.removeStatusEffect(StatusEffects.SPEED);
+        if (speed > 0) player.addStatusEffect(infiniteEffect(StatusEffects.SPEED, speed - 1));
+        else player.removeStatusEffect(StatusEffects.SPEED);
 
         // Night Vision
-        if (nightVision) playerEntity.addStatusEffect(infiniteEffect(StatusEffects.NIGHT_VISION, 0));
-        else playerEntity.removeStatusEffect(StatusEffects.NIGHT_VISION);
+        if (nightVision) player.addStatusEffect(infiniteEffect(StatusEffects.NIGHT_VISION, 0));
+        else player.removeStatusEffect(StatusEffects.NIGHT_VISION);
     }
 
 
     @Contract("_, _ -> new")
     private static @NotNull StatusEffectInstance infiniteEffect(StatusEffect effect, int amplifier) {
         return new StatusEffectInstance(effect, StatusEffectInstance.INFINITE, amplifier, false, false, true);
+    }
+
+    public static boolean playerHasSpecificAttributeModifier(@NotNull PlayerEntity player, EntityAttribute attribute, String name) {
+        for (EntityAttributeModifier entityAttributeModifier : player.getAttributeInstance(attribute).getModifiers(EntityAttributeModifier.Operation.ADDITION)) {
+            if (entityAttributeModifier.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

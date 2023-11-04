@@ -38,40 +38,41 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
             var perks = SkillPerks.getTickRelevantStats(player);
             var mainHand = player.getMainHandStack();
 
-            boolean removeRange = true;
-            boolean removeAttRange = true;
+            // Range noch stackbar ._.
+            if (!mainHand.isIn(ItemTags.SWORDS) && !mainHand.isIn(ItemTags.PICKAXES) && !mainHand.isIn(ItemTags.AXES)) {
+                player.getAttributeInstance(ReachEntityAttributes.REACH).clearModifiers();
+                player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).clearModifiers();
+                continue;
+            }
+
 
             if (mainHand.isIn(ItemTags.SWORDS)) {
                 if (perks.containsKey("Attack Range")) {
-                    var level = perks.get("Attack Range");
+                    var combat_level = perks.get("Attack Range");
+                    var combat_reach = new EntityAttributeModifier("combat_reach", combat_level, EntityAttributeModifier.Operation.ADDITION);
+                    var combat_range = new EntityAttributeModifier("combat_range", combat_level, EntityAttributeModifier.Operation.ADDITION);
 
-                    if (level > 0) {
-                        var currentRange = player.getAttributeValue(ReachEntityAttributes.REACH);
-                        var currentAttackRange = player.getAttributeValue(ReachEntityAttributes.ATTACK_RANGE);
+                    if (combat_level > 0) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifier(player, ReachEntityAttributes.REACH, combat_reach.getName())) {
+                            player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(combat_reach);
+                        }
 
-                        var reach = new EntityAttributeModifier("combat_reach", level - currentRange, EntityAttributeModifier.Operation.ADDITION);
-                        var range = new EntityAttributeModifier("combat_range", level - currentAttackRange, EntityAttributeModifier.Operation.ADDITION);
-
-                        player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(reach);
-                        player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).addPersistentModifier(range);
-
-                        removeRange = false;
-                        removeAttRange = false;
+                        if (!SkillPerks.playerHasSpecificAttributeModifier(player, ReachEntityAttributes.ATTACK_RANGE, combat_range.getName())) {
+                            player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).addPersistentModifier(combat_range);
+                        }
                     }
                 }
             }
 
             if (mainHand.isIn(ItemTags.PICKAXES)) {
                 if (perks.containsKey("Pickaxe Reach")) {
-                    var level = perks.get("Pickaxe Reach");
-                    if (level > 0) {
-                        var currentRange = player.getAttributeValue(ReachEntityAttributes.REACH);
+                    var pickaxe_level = perks.get("Pickaxe Reach");
+                    var pickaxe_reach = new EntityAttributeModifier("pickaxe_reach", pickaxe_level, EntityAttributeModifier.Operation.ADDITION);
 
-                        var reach = new EntityAttributeModifier("pickaxe_reach", level - currentRange, EntityAttributeModifier.Operation.ADDITION);
-
-                        player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(reach);
-
-                        removeRange = false;
+                    if (pickaxe_level > 0) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifier(player, ReachEntityAttributes.REACH, pickaxe_reach.getName())) {
+                            player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(pickaxe_reach);
+                        }
                     }
                 }
 
@@ -83,15 +84,13 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
 
             if (mainHand.isIn(ItemTags.AXES)) {
                 if (perks.containsKey("Axe Reach")) {
-                    var level = perks.get("Axe Reach");
-                    if (level > 0) {
-                        var currentRange = player.getAttributeValue(ReachEntityAttributes.REACH);
+                    var axe_level = perks.get("Axe Reach");
+                    var axe_reach = new EntityAttributeModifier("axe_reach", axe_level, EntityAttributeModifier.Operation.ADDITION);
 
-                        var reach = new EntityAttributeModifier("axe_reach", level - currentRange, EntityAttributeModifier.Operation.ADDITION);
-
-                        player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(reach);
-
-                        removeRange = false;
+                    if (axe_level > 0) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifier(player, ReachEntityAttributes.REACH, axe_reach.getName())) {
+                            player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(axe_reach);
+                        }
                     }
                 }
 
@@ -100,10 +99,6 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 40, level - 1, false, false, false));
                 }
             }
-
-            if (removeRange) player.getAttributeInstance(ReachEntityAttributes.REACH).clearModifiers();
-            if (removeAttRange) player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).clearModifiers();
         }
     }
-
 }
