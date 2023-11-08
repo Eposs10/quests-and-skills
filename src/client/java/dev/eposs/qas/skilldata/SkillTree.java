@@ -21,6 +21,7 @@ public class SkillTree {
     public static final SkillTreeElement FORAGING_ROOT = new SkillTreeElement(Skills.FORAGING.getName(), 1, 1, SkillTreeElement.rootCost);
 
     public static final SkillTreeElement FARMING_ROOT = new SkillTreeElement(Skills.FARMING.getName(), 1, 1, SkillTreeElement.rootCost);
+    public static final SkillTreeElement FARMING_SATURATION = new SkillTreeElement(Skills.FARMING_SATURATION.getName(), 3, 2, new int[]{5,10,15});
 
     public static final SkillTreeElement FISHING_LUCK = new SkillTreeElement(Skills.FISHING_LUCK.getName(), 19, 5, SkillTreeElement.unlockCost19);
     public static final SkillTreeElement FISHING_SPEED = new SkillTreeElement(Skills.FISHING_SPEED.getName(), 19, 5, SkillTreeElement.unlockCost19);

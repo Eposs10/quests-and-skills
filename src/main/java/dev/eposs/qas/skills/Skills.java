@@ -20,6 +20,7 @@ public enum Skills {
     FORAGING_REACH("Axe Reach"),
 
     FARMING("Farming"),
+    FARMING_SATURATION("Saturation"),
 
     FISHING("Fishing"),
     FISHING_LUCK("Luck"),

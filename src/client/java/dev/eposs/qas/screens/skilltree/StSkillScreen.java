@@ -44,6 +44,7 @@ public class StSkillScreen extends SkillTreeScreen {
                     EMPTY_LINE,
                     Text.literal("You can gain Farming exp from all crops. The better your hoe, the higher your exp gain.")
             );
+            case "Saturation" -> skillText = Text.literal("You get a saturation effect based on the level of this perk.");
             case "Fishing" -> skillText = StringVisitable.concat(
                     Text.literal("Unlocks the Fishing skill path."),
                     EMPTY_LINE,
@@ -91,6 +92,7 @@ public class StSkillScreen extends SkillTreeScreen {
             case "Axe Haste" -> this.foraging_haste_BW.active = false;
             case "Axe Reach" -> this.foraging_range_BW.active = false;
             case "Farming" -> this.farming_BW.active = false;
+            case "Saturation" -> this.farming_saturation_BW.active = false;
             case "Fishing" -> this.fishing_BW.active = false;
             case "Luck" -> this.fishing_luck_BW.active = false;
             case "Fishing Speed" -> this.fishing_speed_BW.active = false;

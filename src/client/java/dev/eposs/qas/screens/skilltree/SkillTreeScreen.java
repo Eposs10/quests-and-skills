@@ -65,6 +65,8 @@ public class SkillTreeScreen extends ScreenTemplate {
 
     protected ButtonWidget farming_BW;
     protected IconWidget farming_IW;
+    protected ButtonWidget farming_saturation_BW;
+    protected IconWidget farming_saturation_IW;
 
     protected ButtonWidget fishing_BW;
     protected IconWidget fishing_IW;
@@ -201,6 +203,11 @@ public class SkillTreeScreen extends ScreenTemplate {
         farming_IW.setX(skillX0 + 2);
         farming_IW.setY(skill4Y + 2);
 
+        farming_saturation_BW = button(Text.of(""), skillX1, skill4Y, new StSkillScreen(SkillTree.FARMING_SATURATION));
+        farming_saturation_IW = IconWidget.create(18, 18, new Identifier("textures/mob_effect/saturation.png"), 18, 18);
+        farming_saturation_IW.setX(skillX1 + 1);
+        farming_saturation_IW.setY(skill4Y + 1);
+
         fishing_BW = button(Text.of(""), skillX0, skill5Y, new StSkillScreen(SkillTree.FISHING_ROOT));
         fishing_IW = IconWidget.create(16, 16, new Identifier("textures/item/fishing_rod.png"), 16, 16);
         fishing_IW.setX(skillX0 + 2);
@@ -273,6 +280,8 @@ public class SkillTreeScreen extends ScreenTemplate {
 
         addDrawableChild(farming_BW);
         addDrawableChild(farming_IW);
+        addDrawableChild(farming_saturation_BW);
+        addDrawableChild(farming_saturation_IW);
 
         addDrawableChild(fishing_BW);
         addDrawableChild(fishing_IW);

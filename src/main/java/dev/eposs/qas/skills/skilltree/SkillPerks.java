@@ -63,6 +63,7 @@ public class SkillPerks {
         boolean conduit = false;
         int speed = 0;
         boolean nightVision = false;
+        int saturation = 0;
 
         var st_data = SkillTreeDataHandler.getData(player);
 
@@ -84,6 +85,7 @@ public class SkillPerks {
                     case "Exploring" -> speed++;
                     case "Walk Speed" -> speed = speed + level;
                     case "Night Vision" -> nightVision = true;
+                    case "Saturation" -> saturation = saturation + level;
                 }
             }
         }
@@ -121,6 +123,8 @@ public class SkillPerks {
         // Night Vision
         if (nightVision) player.addStatusEffect(statusEffect(StatusEffects.NIGHT_VISION, 0));
         //else player.removeStatusEffect(StatusEffects.NIGHT_VISION);
+
+        if (saturation > 0) player.addStatusEffect(statusEffect(StatusEffects.SATURATION, saturation - 1));
     }
 
 
