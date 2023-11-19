@@ -8,6 +8,9 @@ public class UnlockSkillButton {
         if (element == null) return false;
         if (element.equals(SkillTreeElement.EMPTY)) return false;
 
+        // Reset Button
+        if (element.equals(SkillTree.RESET)) return resetSkillTree();
+
         var currentLevel = SkillTree.getCurrentLevel(element);
         if (currentLevel == element.maxLevel) return false;
 
@@ -20,5 +23,9 @@ public class UnlockSkillButton {
         QuestsAndSkillsClient.syncSkillPointsToServer();
 
         return true;
+    }
+
+    private static boolean resetSkillTree() {
+        return false;
     }
 }
