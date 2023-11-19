@@ -34,8 +34,8 @@ public class QuestsAndSkillsClient implements ClientModInitializer {
 			var serverData = buf.readNbt();
 			client.execute(() -> {
 				skillTreeData = serverData;
-				SkillTree.checkMaxLevel();
 				QuestsAndSkills.LOGGER.info("S2C: SkillTreeData synced.");
+				SkillTree.checkMaxLevel(true);
 			});
 		});
 	}

@@ -53,7 +53,7 @@ public class SkillTree {
     public static void saveCurrentLevelToNbt(@NotNull SkillTreeElement element, int level) {
         QuestsAndSkillsClient.skillTreeData.putInt(element.getNameAsNbtKey(), level);
 
-        checkMaxLevel();
+        checkMaxLevel(false);
 
         QuestsAndSkillsClient.syncSkillTreeDataToServer();
     }
@@ -69,7 +69,7 @@ public class SkillTree {
     /**
      * always true: skill level <= maxlevel
      */
-    public static void checkMaxLevel() {
+    public static void checkMaxLevel(boolean sync) {
         var st_data = QuestsAndSkillsClient.skillTreeData;
 
         for (SkillTreeElement skill : skillList) {
@@ -81,5 +81,7 @@ public class SkillTree {
                 if (level > maxLevel) st_data.putInt(name, maxLevel);
             }
         }
+
+        if (sync) QuestsAndSkillsClient.syncSkillTreeDataToServer();
     }
 }
