@@ -1,6 +1,7 @@
 package dev.eposs.qas.skills.skilltree;
 
 import dev.eposs.qas.QuestsAndSkills;
+import dev.eposs.qas.accesser.EntityAttributeModifierAccessor;
 import dev.eposs.qas.skills.Skills;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -134,7 +135,8 @@ public class SkillPerks {
 
     public static boolean playerHasSpecificAttributeModifierWithLevel(@NotNull PlayerEntity player, EntityAttribute attribute, String name, double level) {
         for (EntityAttributeModifier entityAttributeModifier : player.getAttributeInstance(attribute).getModifiers(EntityAttributeModifier.Operation.ADDITION)) {
-            if (entityAttributeModifier.getName().equals(name) && entityAttributeModifier.getValue() == level) {
+            EntityAttributeModifierAccessor accessor = (EntityAttributeModifierAccessor) entityAttributeModifier;
+            if (accessor.getName().equals(name) && entityAttributeModifier.getValue() == level) {
                 return true;
             }
         }

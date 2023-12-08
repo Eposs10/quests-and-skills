@@ -1,6 +1,7 @@
 package dev.eposs.qas.skills.skilltree;
 
 import com.jamieswhiteshirt.reachentityattributes.ReachEntityAttributes;
+import dev.eposs.qas.accesser.EntityAttributeModifierAccessor;
 import dev.eposs.qas.skills.exp.ExploringHandling;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -50,15 +51,17 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
                 if (perks.containsKey("Attack Range")) {
                     var combat_level = perks.get("Attack Range");
                     var combat_reach = new EntityAttributeModifier("combat_reach", combat_level, EntityAttributeModifier.Operation.ADDITION);
+                    EntityAttributeModifierAccessor reachAccessor = (EntityAttributeModifierAccessor) combat_reach;
                     var combat_range = new EntityAttributeModifier("combat_range", combat_level, EntityAttributeModifier.Operation.ADDITION);
+                    EntityAttributeModifierAccessor rangeAccessor = (EntityAttributeModifierAccessor) combat_range;
 
                     if (combat_level > 0) {
-                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, combat_reach.getName(), combat_level)) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, reachAccessor.getName(), combat_level)) {
                             player.getAttributeInstance(ReachEntityAttributes.REACH).clearModifiers();
                             player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(combat_reach);
                         }
 
-                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.ATTACK_RANGE, combat_range.getName(), combat_level)) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.ATTACK_RANGE, rangeAccessor.getName(), combat_level)) {
                             player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).clearModifiers();
                             player.getAttributeInstance(ReachEntityAttributes.ATTACK_RANGE).addPersistentModifier(combat_range);
                         }
@@ -70,9 +73,10 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
                 if (perks.containsKey("Pickaxe Reach")) {
                     var pickaxe_level = perks.get("Pickaxe Reach");
                     var pickaxe_reach = new EntityAttributeModifier("pickaxe_reach", pickaxe_level, EntityAttributeModifier.Operation.ADDITION);
+                    EntityAttributeModifierAccessor reachAccessor = (EntityAttributeModifierAccessor) pickaxe_reach;
 
                     if (pickaxe_level > 0) {
-                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, pickaxe_reach.getName(), pickaxe_level)) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, reachAccessor.getName(), pickaxe_level)) {
                             player.getAttributeInstance(ReachEntityAttributes.REACH).clearModifiers();
                             player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(pickaxe_reach);
                         }
@@ -89,9 +93,10 @@ public class StartWorldTickEvent implements ServerTickEvents.StartWorldTick {
                 if (perks.containsKey("Axe Reach")) {
                     var axe_level = perks.get("Axe Reach");
                     var axe_reach = new EntityAttributeModifier("axe_reach", axe_level, EntityAttributeModifier.Operation.ADDITION);
+                    EntityAttributeModifierAccessor reachAccessor = (EntityAttributeModifierAccessor) axe_reach;
 
                     if (axe_level > 0) {
-                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, axe_reach.getName(), axe_level)) {
+                        if (!SkillPerks.playerHasSpecificAttributeModifierWithLevel(player, ReachEntityAttributes.REACH, reachAccessor.getName(), axe_level)) {
                             player.getAttributeInstance(ReachEntityAttributes.REACH).clearModifiers();
                             player.getAttributeInstance(ReachEntityAttributes.REACH).addPersistentModifier(axe_reach);
                         }
