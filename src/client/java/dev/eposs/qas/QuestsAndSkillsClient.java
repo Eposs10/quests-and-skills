@@ -1,6 +1,7 @@
 package dev.eposs.qas;
 
 import dev.eposs.qas.events.KeyInputHandler;
+import dev.eposs.qas.skilldata.SkillTree;
 import dev.eposs.qas.skills.ModSkills;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -34,6 +35,7 @@ public class QuestsAndSkillsClient implements ClientModInitializer {
 			client.execute(() -> {
 				skillTreeData = serverData;
 				QuestsAndSkills.LOGGER.info("S2C: SkillTreeData synced.");
+				SkillTree.checkMaxLevel(true);
 			});
 		});
 	}

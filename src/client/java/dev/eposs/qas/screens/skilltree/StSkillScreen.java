@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class StSkillScreen extends SkillTreeScreen {
 
+    static Text UNFINISHED = Text.literal("This Perk is not finished and doesn't work yet!").setStyle(Style.EMPTY.withColor(Formatting.RED));
+
     StSkillScreen(@NotNull SkillTreeElement element) {
         this.selectedElement = element;
 
@@ -59,7 +61,7 @@ public class StSkillScreen extends SkillTreeScreen {
                     Text.literal("You will gain Exploring exp every now and then.")
             );
             case "Walk Speed" -> skillText = Text.literal("You get a speed effect based on the level of this perk.");
-            case "Feather Falling" -> skillText = Text.literal("This Perk is not finished and doesn't work yet!").setStyle(Style.EMPTY.withColor(Formatting.RED)); // Text.literal("Increases the fall height before you take damage based on the level of this perk.");
+            case "Feather Falling" -> skillText = Text.literal("Increases the fall height before you take damage based on the level of this perk.");
             case "Night Vision" -> skillText = Text.literal("You get the Night Vision effect.");
         }
 

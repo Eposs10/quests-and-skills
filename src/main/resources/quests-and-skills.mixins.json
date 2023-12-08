@@ -5,6 +5,7 @@
   "mixins": [
     "BlockPlaceMixin",
     "ExampleMixin",
+    "FallHeightMixin",
     "FishingMixin",
     "FishingSpeedMixin",
     "PlayerDataMixin"

@@ -75,14 +75,13 @@ public class SkillPerks {
                 if (level <= 0) continue;
 
                 switch (name) {
-                    //case "Mining", "Farming", "Foraging" -> playerEntity.giveItemStack(new ItemStack(Items.DIAMOND, 5)); // ToDo: 1 time reward method
+                    //case "Mining", "Farming", "Foraging", "Exploring" -> playerEntity.giveItemStack(new ItemStack(Items.DIAMOND, 5)); // ToDo: 1 time reward method
                     case "Combat" -> healthBoost++;
                     case "Max Health" -> healthBoost = healthBoost + level;
                     case "Regeneration" -> regeneration = regeneration + level;
                     case "Fishing" -> luck++;
                     case "Luck" -> luck = luck + level;
                     case "Conduit Effect" -> conduit = true;
-                    case "Exploring" -> speed++;
                     case "Walk Speed" -> speed = speed + level;
                     case "Night Vision" -> nightVision = true;
                     case "Saturation" -> saturation = saturation + level;
